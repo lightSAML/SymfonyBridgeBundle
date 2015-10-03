@@ -1,0 +1,37 @@
+{
+    "name": "lightsaml/symfony-bridge",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Light SAML Symfony bridge bundle",
+    "autoload": {
+        "psr-0": {
+            "LightSaml\\SymfonyBridgeBundle\\Tests\\": "tests/",
+            "LightSaml\\SymfonyBridgeBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.1",
+        "symfony/framework-bundle": "^2.3",
+        "symfony/expression-language": "^2.4",
+        "lightSAML/lightSAML": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5",
+        "squizlabs/php_codesniffer": "~2.0"
+    },
+    "suggest": {
+        "lightsaml/lightsamp-idp": "If you will be using IDP LightSAML services"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "bash contrib/setup.sh"
+        ],
+        "post-update-cmd": [
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,14 @@
+parameters:
+    lightsaml.own.entity_id: ~
+
+services:
+    lightsaml.own.credential_store:
+        class: LightSaml\Store\Credential\CompositeCredentialStore
+
+    lightsaml.own.entity_descriptor_provider:
+        class: LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder
+        arguments:
+            - %lightsaml.own.entity_id%
+            - "@=service('router').generate('lightsaml.login_check', [], true)"
+            - ~
+            - "@=service('lightsaml.own.credential_store').getByEntityId(parameter('lightsaml.own.entity_id'))[0].getCertificate()"
