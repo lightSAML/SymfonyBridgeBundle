@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('lightsaml');
+        $root = $treeBuilder->root('light_saml_symfony_bridge');
 
         $root->children()
             ->arrayNode('own')

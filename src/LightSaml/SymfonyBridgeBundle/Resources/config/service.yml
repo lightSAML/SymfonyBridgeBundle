@@ -71,5 +71,5 @@ services:
     lightsaml.service.session_processor:
         class: LightSaml\Resolver\Session\SessionProcessor
         arguments:
-            - @lightsaml.service.sso_state
+            - @lightsaml.store.sso_state
             - @lightsaml.system.time_provider
