@@ -1,11 +1,19 @@
 <?php
 
+/*
+ * This file is part of the LightSAML Symfony Bridge Bundle package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\SymfonyBridgeBundle\Bridge\Container;
 
 use LightSaml\Build\Container\SystemContainerInterface;
 use LightSaml\Provider\TimeProvider\TimeProviderInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
