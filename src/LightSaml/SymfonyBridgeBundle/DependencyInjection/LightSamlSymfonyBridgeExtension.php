@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML Symfony Bridge Bundle package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\SymfonyBridgeBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,7 +24,7 @@ class LightSamlSymfonyBridgeExtension extends Extension
     /**
      * Loads a specific configuration.
      *
-     * @param array            $config An array of configuration values
+     * @param array            $config    An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
@@ -87,7 +96,7 @@ class LightSamlSymfonyBridgeExtension extends Extension
                     $config['own']['entity_id'],
                     $data['certificate'],
                     $data['key'],
-                    $data['password']
+                    $data['password'],
                 ]
             );
             $definition->addTag('lightsaml.own_credential_store');

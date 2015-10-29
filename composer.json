@@ -16,8 +16,7 @@
         "lightSAML/lightSAML": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.5",
-        "squizlabs/php_codesniffer": "~2.0"
+        "phpunit/phpunit": "~4.5"
     },
     "suggest": {
         "lightsaml/lightsamp-idp": "If you will be using IDP LightSAML services"

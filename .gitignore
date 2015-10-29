@@ -36,3 +36,5 @@
 # Composer PHAR
 /composer.phar
 /composer.lock
+/*.phar
+/*.cache
