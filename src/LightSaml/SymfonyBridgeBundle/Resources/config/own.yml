@@ -8,8 +8,10 @@ services:
 
     lightsaml.own.entity_descriptor_provider:
         class: LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder
+        factory: [LightSaml\SymfonyBridgeBundle\Factory\OwnEntityDescriptorProviderFactory, build]
         arguments:
             - %lightsaml.own.entity_id%
-            - "@=service('router').generate(parameter('lightsaml.route.login_check'), [], true)"
+            - @router
+            - %lightsaml.route.login_check%
             - ~
-            - "@=service('lightsaml.own.credential_store').getByEntityId(parameter('lightsaml.own.entity_id'))[0].getCertificate()"
+            - @lightsaml.own.credential_store
