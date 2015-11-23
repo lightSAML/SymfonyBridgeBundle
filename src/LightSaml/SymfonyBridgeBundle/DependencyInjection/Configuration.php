@@ -28,6 +28,7 @@ class Configuration implements ConfigurationInterface
 
         $root->children()
             ->arrayNode('own')
+                ->isRequired()
                 ->children()
                     ->scalarNode('entity_id')->isRequired()->cannotBeEmpty()->end()
                     ->arrayNode('entity_descriptor_provider')

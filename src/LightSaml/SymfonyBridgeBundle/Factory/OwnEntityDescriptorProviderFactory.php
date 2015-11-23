@@ -18,6 +18,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OwnEntityDescriptorProviderFactory
 {
+    /**
+     * @param string                   $ownEntityId
+     * @param RouterInterface          $router
+     * @param string                   $acsRouteName
+     * @param string                   $ssoRouteName
+     * @param CredentialStoreInterface $ownCredentialStore
+     *
+     * @return SimpleEntityDescriptorBuilder
+     */
     public static function build(
         $ownEntityId,
         RouterInterface $router,

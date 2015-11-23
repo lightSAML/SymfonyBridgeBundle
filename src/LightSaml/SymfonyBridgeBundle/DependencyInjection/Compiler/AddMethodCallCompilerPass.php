@@ -39,6 +39,30 @@ class AddMethodCallCompilerPass implements CompilerPassInterface
     }
 
     /**
+     * @return string
+     */
+    public function getServiceId()
+    {
+        return $this->serviceId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTagName()
+    {
+        return $this->tagName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodName()
+    {
+        return $this->methodName;
+    }
+
+    /**
      * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)

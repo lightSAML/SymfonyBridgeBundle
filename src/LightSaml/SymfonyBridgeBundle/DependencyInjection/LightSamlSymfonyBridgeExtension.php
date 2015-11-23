@@ -91,7 +91,7 @@ class LightSamlSymfonyBridgeExtension extends Extension
 
         foreach ($config['own']['credentials'] as $id => $data) {
             $definition = new Definition(
-                'LightSaml\Store\Credential\X509FileCredentialStore',
+                \LightSaml\Store\Credential\X509FileCredentialStore::class,
                 [
                     $config['own']['entity_id'],
                     $data['certificate'],
