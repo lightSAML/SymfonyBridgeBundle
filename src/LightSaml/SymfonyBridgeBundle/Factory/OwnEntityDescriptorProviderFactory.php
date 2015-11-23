@@ -33,5 +33,7 @@ class OwnEntityDescriptorProviderFactory
             $ssoRouteName ? $router->generate($ssoRouteName, [], RouterInterface::ABSOLUTE_URL) : null,
             $arrOwnCredentials[0]->getCertificate()
         );
+
+        return $builder;
     }
 }
