@@ -17,7 +17,7 @@ use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 
 class CredentialStoreFactory
 {
-    public function build(
+    public static function build(
         EntityDescriptorStoreInterface $idpEntityDescriptorStore,
         EntityDescriptorStoreInterface $spEntityDescriptorStore,
         $ownEntityId,

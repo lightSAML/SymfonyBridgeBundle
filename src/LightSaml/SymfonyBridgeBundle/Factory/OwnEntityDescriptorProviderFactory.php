@@ -18,7 +18,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OwnEntityDescriptorProviderFactory
 {
-    public function build(
+    public static function build(
         $ownEntityId,
         RouterInterface $router,
         $acsRouteName,
