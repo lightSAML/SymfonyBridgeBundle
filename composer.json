@@ -21,13 +21,6 @@
     "suggest": {
         "lightsaml/lightsamp-idp": "If you will be using IDP LightSAML services"
     },
-    "scripts": {
-        "post-install-cmd": [
-            "bash contrib/setup.sh"
-        ],
-        "post-update-cmd": [
-        ]
-    },
     "config": {
         "bin-dir": "bin"
     },
