@@ -11,9 +11,9 @@
     },
     "require": {
         "php": ">=5.5.1",
-        "symfony/framework-bundle": "~2.6",
-        "symfony/dependency-injection": "~2.6",
-        "symfony/yaml": "~2.3",
+        "symfony/framework-bundle": "~2.6|~3.0",
+        "symfony/dependency-injection": "~2.6|~3.0",
+        "symfony/yaml": "~2.3|~3.0",
         "lightSAML/lightSAML": "dev-master"
     },
     "require-dev": {
