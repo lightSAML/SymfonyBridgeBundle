@@ -20,12 +20,12 @@ class SystemContainerTest extends \PHPUnit_Framework_TestCase
         }
 
         $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
-        $containerMock->method('get')
-            ->with('request_stack')
-            ->willReturn($requestStackMock = $this->getMock(RequestStack::class));
         $containerMock->method('has')
             ->with('request_stack')
             ->willReturn(true);
+        $containerMock->method('get')
+            ->with('request_stack')
+            ->willReturn($requestStackMock = $this->getMock(RequestStack::class));
 
         $requestStackMock->method('getCurrentRequest')
             ->willReturn($expected = new Request());
@@ -40,7 +40,12 @@ class SystemContainerTest extends \PHPUnit_Framework_TestCase
         }
 
         $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
-        $container->setRequest($expected = new Request());
+        $containerMock->method('has')
+            ->with('request_stack')
+            ->willReturn(false);
+        $containerMock->method('get')
+            ->with('request')
+            ->willReturn($expected = new Request());
 
         $this->assertSame($expected, $container->getRequest());
     }

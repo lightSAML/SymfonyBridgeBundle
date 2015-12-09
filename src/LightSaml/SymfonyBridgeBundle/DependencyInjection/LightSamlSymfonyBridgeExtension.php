@@ -13,7 +13,6 @@ namespace LightSaml\SymfonyBridgeBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
@@ -114,12 +113,6 @@ class LightSamlSymfonyBridgeExtension extends Extension
 
     private function configureSystem(ContainerBuilder $container, array $config)
     {
-        // Support for symfony 2.3 http://symfony.com/doc/2.3/cookbook/service_container/scopes.html#using-a-synchronized-service
-        if (false == class_exists('Symfony\Component\HttpFoundation\RequestStack')) {
-            $container->getDefinition('lightsaml.container.build')
-                ->addMethodCall('setRequest', [new Reference('request', ContainerInterface::NULL_ON_INVALID_REFERENCE)]);
-        }
-
         if (isset($config['system']['event_dispatcher'])) {
             $container->removeDefinition('lightsaml.system.event_dispatcher');
             $container->setAlias('lightsaml.system.event_dispatcher', $config['system']['event_dispatcher']);

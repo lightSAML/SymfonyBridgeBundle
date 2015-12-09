@@ -20,22 +20,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SystemContainer extends AbstractContainer implements SystemContainerInterface
 {
-    private $request;
-
-    /**
-     * Support for symfony 2.3 http://symfony.com/doc/2.3/cookbook/service_container/scopes.html#using-a-synchronized-service.
-     *
-     * @param mixed $request
-     *
-     * @return SystemContainer
-     */
-    public function setRequest(Request $request = null)
-    {
-        $this->request = $request;
-
-        return $this;
-    }
-
     /**
      * @return Request
      */
@@ -43,11 +27,9 @@ class SystemContainer extends AbstractContainer implements SystemContainerInterf
     {
         if ($this->container->has('request_stack')) {
             return $this->container->get('request_stack')->getCurrentRequest();
-        } elseif (null == $this->request) {
-            throw new \LogicException('No request - probably not in a request scope');
         }
 
-        return $this->request;
+        return $this->container->get('request');
     }
 
     /**
