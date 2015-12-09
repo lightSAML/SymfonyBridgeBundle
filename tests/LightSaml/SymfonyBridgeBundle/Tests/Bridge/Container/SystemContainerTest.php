@@ -13,14 +13,34 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SystemContainerTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_returns_request()
+    public function test_returns_request_from_stack()
     {
+        if (false == class_exists('Symfony\Component\HttpFoundation\RequestStack')) {
+            return;
+        }
+
         $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('request_stack')
             ->willReturn($requestStackMock = $this->getMock(RequestStack::class));
+        $containerMock->method('has')
+            ->with('request_stack')
+            ->willReturn(true);
+
         $requestStackMock->method('getCurrentRequest')
             ->willReturn($expected = new Request());
+
+        $this->assertSame($expected, $container->getRequest());
+    }
+
+    public function test_returns_request_from_scope()
+    {
+        if (class_exists('Symfony\Component\HttpFoundation\RequestStack')) {
+            return;
+        }
+
+        $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
+        $container->setRequest($expected = new Request());
 
         $this->assertSame($expected, $container->getRequest());
     }
