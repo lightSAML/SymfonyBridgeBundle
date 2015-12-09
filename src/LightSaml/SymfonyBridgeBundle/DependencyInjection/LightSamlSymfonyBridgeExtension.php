@@ -67,18 +67,25 @@ class LightSamlSymfonyBridgeExtension extends Extension
             $container->setAlias('lightsaml.own.entity_descriptor_provider', $config['own']['entity_descriptor_provider']['id']);
         } elseif (isset($config['own']['entity_descriptor_provider']['filename'])) {
             if (isset($config['own']['entity_descriptor_provider']['entity_id'])) {
-                $container
-                    ->setDefinition('lightsaml.own.entity_descriptor_provider', new Definition())
-                    ->setFactory(['LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntitiesDescriptorFile'])
+                $definition = $container->setDefinition('lightsaml.own.entity_descriptor_provider', new Definition());
+                $definition
                     ->addArgument($config['own']['entity_descriptor_provider']['filename'])
-                    ->addArgument($config['own']['entity_descriptor_provider']['entity_id'])
-                ;
+                    ->addArgument($config['own']['entity_descriptor_provider']['entity_id']);
+                if (method_exists($definition, 'setFactory')) {
+                    $definition->setFactory(['LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntitiesDescriptorFile']);
+                } else {
+                    $definition->setFactoryClass('LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory');
+                    $definition->setFactoryMethod('fromEntitiesDescriptorFile');
+                }
             } else {
-                $container
-                    ->setDefinition('lightsaml.own.entity_descriptor_provider', new Definition())
-                    ->setFactory(['LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntityDescriptorFile'])
-                    ->addArgument($config['own']['entity_descriptor_provider']['filename'])
-                ;
+                $definition = $container->setDefinition('lightsaml.own.entity_descriptor_provider', new Definition())
+                    ->addArgument($config['own']['entity_descriptor_provider']['filename']);
+                if (method_exists($definition, 'setFactory')) {
+                    $definition->setFactory(['LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntityDescriptorFile']);
+                } else {
+                    $definition->setFactoryClass('LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory');
+                    $definition->setFactoryMethod('fromEntityDescriptorFile');
+                }
             }
         }
     }
