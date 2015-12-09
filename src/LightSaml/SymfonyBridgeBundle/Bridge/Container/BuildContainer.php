@@ -19,11 +19,26 @@ use LightSaml\Build\Container\ProviderContainerInterface;
 use LightSaml\Build\Container\ServiceContainerInterface;
 use LightSaml\Build\Container\StoreContainerInterface;
 use LightSaml\Build\Container\SystemContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class BuildContainer extends AbstractContainer implements BuildContainerInterface
 {
     /** @var AbstractContainer[] */
     private $containers = [];
+
+    /**
+     * Support for symfony 2.3 http://symfony.com/doc/2.3/cookbook/service_container/scopes.html#using-a-synchronized-service.
+     *
+     * @param Request|null $request
+     *
+     * @return SystemContainer
+     */
+    public function setRequest(Request $request = null)
+    {
+        $this->getSystemContainer()->setRequest($request);
+
+        return $this;
+    }
 
     /**
      * @return SystemContainerInterface
