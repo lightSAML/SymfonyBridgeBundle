@@ -107,7 +107,7 @@ class LightSamlSymfonyBridgeExtension extends Extension
 
     private function configureOwnCredentials(ContainerBuilder $container, array $config)
     {
-        if (false == isset($config['own']['credentials'])) {
+        if (false === isset($config['own']['credentials'])) {
             return;
         }
 
