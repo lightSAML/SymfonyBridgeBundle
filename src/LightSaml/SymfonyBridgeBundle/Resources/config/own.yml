@@ -8,4 +8,6 @@ services:
 
     lightsaml.own.entity_descriptor_provider:
         class: LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder
-        # factory set in extension, differently based on symfony version
+        # factory set in extension, all with arguments, differently based on symfony version
+        # factory: ["@LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory", "fromEntitiesDescriptorFile"]
+        # factory: ["@LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory", "fromEntityDescriptorFile"]
