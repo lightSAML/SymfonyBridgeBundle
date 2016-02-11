@@ -56,7 +56,7 @@ services:
 
     lightsaml.service.credential_resolver:
         class: LightSaml\Resolver\Credential\CompositeFilterResolver
-        factory: ["@lightsaml.service.credential_resolver_factory", build]
+        # factory: ["@lightsaml.service.credential_resolver_factory", build] # set in extension, differently based on symfony version
 
     lightsaml.service.signature_resolver:
         class: LightSaml\Resolver\Signature\OwnSignatureResolver
