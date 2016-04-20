@@ -62,7 +62,7 @@ class LightSamlSymfonyBridgeExtension extends Extension
 
     private function configureCredentialStore(ContainerBuilder $container, array $config)
     {
-        $factoryReference = $container->getDefinition('lightsaml.credential.credential_store_factory');
+        $factoryReference = new Reference('lightsaml.credential.credential_store_factory');
         $definition = $container->getDefinition('lightsaml.credential.credential_store');
         $this->setFactoryCompatibleWay($definition, $factoryReference, 'buildFromOwnCredentialStore');
     }
@@ -74,7 +74,7 @@ class LightSamlSymfonyBridgeExtension extends Extension
 
     private function configureServiceCredentialResolver(ContainerBuilder $container, array $config)
     {
-        $factoryReference = $container->getDefinition('lightsaml.service.credential_resolver_factory');
+        $factoryReference = new Reference('lightsaml.service.credential_resolver_factory');
         $definition = $container->getDefinition('lightsaml.service.credential_resolver');
         $this->setFactoryCompatibleWay($definition, $factoryReference, 'build');
     }
