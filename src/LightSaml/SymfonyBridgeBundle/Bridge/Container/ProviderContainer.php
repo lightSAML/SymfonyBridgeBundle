@@ -12,7 +12,6 @@
 namespace LightSaml\SymfonyBridgeBundle\Bridge\Container;
 
 use LightSaml\Build\Container\ProviderContainerInterface;
-use LightSaml\Provider\Attribute\AttributeNameProviderInterface;
 use LightSaml\Provider\Attribute\AttributeValueProviderInterface;
 use LightSaml\Provider\NameID\NameIdProviderInterface;
 use LightSaml\Provider\Session\SessionInfoProviderInterface;
@@ -25,14 +24,6 @@ class ProviderContainer extends AbstractContainer implements ProviderContainerIn
     public function getAttributeValueProvider()
     {
         return $this->container->get('lightsaml.provider.attribute_value');
-    }
-
-    /**
-     * @return AttributeNameProviderInterface
-     */
-    public function getAttributeNameProvider()
-    {
-        return $this->container->get('lightsaml.provider.attribute_name');
     }
 
     /**

@@ -1,12 +1,9 @@
 services:
     lightsaml.provider.attribute_value:
-        class: LightSaml\Provider\Attribute\AttributeValueProviderInterface
-
-    lightsaml.provider.attribute_name:
-        class: LightSaml\Provider\Attribute\AttributeNameProviderInterface
+        class: LightSaml\Provider\Attribute\FixedAttributeValueProvider
 
     lightsaml.provider.session_info:
-        class: LightSaml\Provider\Attribute\SessionInfoProviderInterface
+        class: LightSaml\Provider\Session\FixedSessionInfoProvider
 
     lightsaml.provider.name_id:
-        class: LightSaml\Provider\NameID\NameIdProviderInterface
+        class: LightSaml\Provider\NameID\FixedNameIdProvider

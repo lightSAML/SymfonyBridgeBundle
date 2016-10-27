@@ -2,7 +2,6 @@
 
 namespace LightSaml\SymfonyBridgeBundle\Tests\Bridge\Container;
 
-use LightSaml\Provider\Attribute\AttributeNameProviderInterface;
 use LightSaml\Provider\Attribute\AttributeValueProviderInterface;
 use LightSaml\Provider\NameID\NameIdProviderInterface;
 use LightSaml\Provider\Session\SessionInfoProviderInterface;
@@ -19,16 +18,6 @@ class ProviderContainerTest extends \PHPUnit_Framework_TestCase
             ->willReturn($expected = $this->getMock(AttributeValueProviderInterface::class));
 
         $this->assertSame($expected, $container->getAttributeValueProvider());
-    }
-
-    public function test_returns_attribute_name_provider()
-    {
-        $container = new ProviderContainer($containerMock = TestHelper::getContainerMock($this));
-        $containerMock->method('get')
-            ->with('lightsaml.provider.attribute_name')
-            ->willReturn($expected = $this->getMock(AttributeNameProviderInterface::class));
-
-        $this->assertSame($expected, $container->getAttributeNameProvider());
     }
 
     public function test_returns_session_info_provider()
