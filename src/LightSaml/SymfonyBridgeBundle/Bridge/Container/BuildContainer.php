@@ -12,13 +12,6 @@
 namespace LightSaml\SymfonyBridgeBundle\Bridge\Container;
 
 use LightSaml\Build\Container\BuildContainerInterface;
-use LightSaml\Build\Container\CredentialContainerInterface;
-use LightSaml\Build\Container\OwnContainerInterface;
-use LightSaml\Build\Container\PartyContainerInterface;
-use LightSaml\Build\Container\ProviderContainerInterface;
-use LightSaml\Build\Container\ServiceContainerInterface;
-use LightSaml\Build\Container\StoreContainerInterface;
-use LightSaml\Build\Container\SystemContainerInterface;
 
 class BuildContainer extends AbstractContainer implements BuildContainerInterface
 {
@@ -30,7 +23,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getSystemContainer()
     {
-        return $this->getContainer(SystemContainer::class);
+        return $this->getContainer('SystemContainer');
     }
 
     /**
@@ -38,7 +31,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getPartyContainer()
     {
-        return $this->getContainer(PartyContainer::class);
+        return $this->getContainer('PartyContainer');
     }
 
     /**
@@ -46,7 +39,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getStoreContainer()
     {
-        return $this->getContainer(StoreContainer::class);
+        return $this->getContainer('StoreContainer');
     }
 
     /**
@@ -54,7 +47,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getProviderContainer()
     {
-        return $this->getContainer(ProviderContainer::class);
+        return $this->getContainer('ProviderContainer');
     }
 
     /**
@@ -62,7 +55,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getCredentialContainer()
     {
-        return $this->getContainer(CredentialContainer::class);
+        return $this->getContainer('CredentialContainer');
     }
 
     /**
@@ -70,7 +63,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getServiceContainer()
     {
-        return $this->getContainer(ServiceContainer::class);
+        return $this->getContainer('ServiceContainer');
     }
 
     /**
@@ -78,7 +71,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getOwnContainer()
     {
-        return $this->getContainer(OwnContainer::class);
+        return $this->getContainer('OwnContainer');
     }
 
     /**
@@ -86,12 +79,14 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      *
      * @return AbstractContainer
      */
-    private function getContainer($class)
+    private function getContainer($className)
     {
-        if (false === isset($this->containers[$class])) {
-            $this->containers[$class] = new $class($this->container);
+        $fullName = 'LightSaml\SymfonyBridgeBundle\Bridge\Container\\' . $className;
+
+        if (false === isset($this->containers[$className])) {
+            $this->containers[$className] = new $fullName($this->container);
         }
 
-        return $this->containers[$class];
+        return $this->containers[$className];
     }
 }
