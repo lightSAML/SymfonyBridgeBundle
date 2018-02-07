@@ -20,9 +20,9 @@
     },
     "require": {
         "php": ">=5.5.1",
-        "symfony/framework-bundle": "~2.3|~3.0",
-        "symfony/dependency-injection": "~2.3|~3.0",
-        "symfony/yaml": "~2.3|~3.0",
+        "symfony/framework-bundle": "~2.3|~3.0|~4.0",
+        "symfony/dependency-injection": "~2.3|~3.0|~4.0",
+        "symfony/yaml": "~2.3|~3.0|~4.0",
         "lightsaml/lightsaml": "~1.1"
     },
     "require-dev": {
