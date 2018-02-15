@@ -4,6 +4,7 @@ services:
 
     lightsaml.party.idp_entity_descriptor_store:
         class: LightSaml\Store\EntityDescriptor\CompositeEntityDescriptorStore
+        public: true
 
     lightsaml.party.idp_entity_descriptor_store.file:
         class: LightSaml\Store\EntityDescriptor\FileEntityDescriptorStore
@@ -13,3 +14,4 @@ services:
 
     lightsaml.party.trust_options_store:
         class: LightSaml\Store\TrustOptions\CompositeTrustOptionsStore
+        public: true
