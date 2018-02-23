@@ -41,4 +41,9 @@ class ProviderContainer extends AbstractContainer implements ProviderContainerIn
     {
         return $this->container->get('lightsaml.provider.name_id');
     }
+
+    public function getAttributeNameProvider()
+    {
+        return $this->container->get('lightsaml.provider.attribute_name');
+    }
 }
