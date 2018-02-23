@@ -157,7 +157,7 @@ class LightSamlSymfonyBridgeExtension extends Extension
             foreach ($config['party']['idp']['files'] as $id => $file) {
                 $id = sprintf('lightsaml.party.idp_entity_descriptor_store.file.%s', $id);
 
-                if(class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
+                if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
                     // Symfony >= 3.3
                     $container
                         ->setDefinition($id, new ChildDefinition('lightsaml.party.idp_entity_descriptor_store.file'))

@@ -21,7 +21,7 @@ class AddMethodCallCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $pass->process($containerBuilder);
 
-        $this->assertCount(0, $containerBuilder->getDefinitions());
+        $this->assertFalse($containerBuilder->hasDefinition($serviceId));
     }
 
     public function test_process_adds_calls_to_service_with_argument_reference_to_all_tagged_services()
