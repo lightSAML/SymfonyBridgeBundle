@@ -37,6 +37,7 @@ services:
 
     lightsaml.service.endpoint_resolver:
         class: LightSaml\Resolver\Endpoint\CompositeEndpointResolver
+        public: true
         calls:
             - [add, ["@lightsaml.service.endpoint_resolver.binding"]]
             - [add, ["@lightsaml.service.endpoint_resolver.descriptor_type"]]
@@ -46,6 +47,7 @@ services:
 
     lightsaml.service.binding_factory:
         class: LightSaml\Binding\BindingFactory
+        public: true
         arguments:
             - "@lightsaml.system.event_dispatcher"
 
@@ -60,6 +62,7 @@ services:
 
     lightsaml.service.signature_resolver:
         class: LightSaml\Resolver\Signature\OwnSignatureResolver
+        public: true
         arguments:
             - "@lightsaml.service.credential_resolver"
 
