@@ -15,7 +15,7 @@ class OwnContainerTest extends \PHPUnit_Framework_TestCase
         $container = new OwnContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.own.entity_descriptor_provider')
-            ->willReturn($expected = $this->getMock(EntityDescriptorProviderInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(EntityDescriptorProviderInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getOwnEntityDescriptorProvider());
     }
@@ -26,13 +26,13 @@ class OwnContainerTest extends \PHPUnit_Framework_TestCase
 
         $containerMock->method('get')
             ->with('lightsaml.own.credential_store')
-            ->willReturn($credentialStoreMock = $this->getMock(CredentialStoreInterface::class));
+            ->willReturn($credentialStoreMock = $this->getMockBuilder(CredentialStoreInterface::class)->getMock());
         $containerMock->method('getParameter')
             ->with('lightsaml.own.entity_id')
             ->willReturn('foo');
 
         $credentialStoreMock->method('getByEntityId')
-            ->willReturn([$expected = $this->getMock(CredentialInterface::class)]);
+            ->willReturn([$expected = $this->getMockBuilder(CredentialInterface::class)->getMock()]);
 
         $result = $container->getOwnCredentials();
         $this->assertTrue(is_array($result));

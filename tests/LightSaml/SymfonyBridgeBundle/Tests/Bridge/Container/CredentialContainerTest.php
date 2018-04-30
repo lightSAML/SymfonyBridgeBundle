@@ -13,7 +13,7 @@ class CredentialContainerTest extends \PHPUnit_Framework_TestCase
         $container = new CredentialContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.credential.credential_store')
-            ->willReturn($expected = $this->getMock(CredentialStoreInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(CredentialStoreInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getCredentialStore());
     }

@@ -25,7 +25,7 @@ class SystemContainerTest extends \PHPUnit_Framework_TestCase
             ->willReturn(true);
         $containerMock->method('get')
             ->with('request_stack')
-            ->willReturn($requestStackMock = $this->getMock(RequestStack::class));
+            ->willReturn($requestStackMock = $this->getMockBuilder(RequestStack::class)->getMock());
 
         $requestStackMock->method('getCurrentRequest')
             ->willReturn($expected = new Request());
@@ -55,7 +55,7 @@ class SystemContainerTest extends \PHPUnit_Framework_TestCase
         $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('session')
-            ->willReturn($expected = $this->getMock(SessionInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(SessionInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getSession());
     }
@@ -65,7 +65,7 @@ class SystemContainerTest extends \PHPUnit_Framework_TestCase
         $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.system.time_provider')
-            ->willReturn($expected = $this->getMock(TimeProviderInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(TimeProviderInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getTimeProvider());
     }
@@ -75,7 +75,7 @@ class SystemContainerTest extends \PHPUnit_Framework_TestCase
         $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.system.event_dispatcher')
-            ->willReturn($expected = $this->getMock(EventDispatcherInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(EventDispatcherInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getEventDispatcher());
     }
@@ -85,7 +85,7 @@ class SystemContainerTest extends \PHPUnit_Framework_TestCase
         $container = new SystemContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.system.logger')
-            ->willReturn($expected = $this->getMock(LoggerInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(LoggerInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getLogger());
     }
