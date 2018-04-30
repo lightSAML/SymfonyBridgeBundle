@@ -4,9 +4,12 @@ parameters:
 services:
     lightsaml.system.time_provider:
         class: LightSaml\Provider\TimeProvider\SystemTimeProvider
+        public: true
 
     lightsaml.system.event_dispatcher:
         class: Symfony\Component\EventDispatcher\EventDispatcher
+        public: true
 
     lightsaml.system.logger:
+        public: true
         alias: logger

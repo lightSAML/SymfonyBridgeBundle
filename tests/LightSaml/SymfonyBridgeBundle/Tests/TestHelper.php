@@ -11,6 +11,7 @@ abstract class TestHelper
      */
     public static function getContainerMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
+        return $test->getMockBuilder(\Symfony\Component\DependencyInjection\ContainerInterface::class)
+            ->getMock();
     }
 }

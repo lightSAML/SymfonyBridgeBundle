@@ -21,7 +21,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.assertion_validator')
-            ->willReturn($expected = $this->getMock(AssertionValidatorInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(AssertionValidatorInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getAssertionValidator());
     }
@@ -31,7 +31,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.assertion_time_validator')
-            ->willReturn($expected = $this->getMock(AssertionTimeValidatorInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(AssertionTimeValidatorInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getAssertionTimeValidator());
     }
@@ -41,7 +41,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.signature_resolver')
-            ->willReturn($expected = $this->getMock(SignatureResolverInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(SignatureResolverInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getSignatureResolver());
     }
@@ -51,7 +51,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.endpoint_resolver')
-            ->willReturn($expected = $this->getMock(EndpointResolverInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(EndpointResolverInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getEndpointResolver());
     }
@@ -61,7 +61,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.name_id_validator')
-            ->willReturn($expected = $this->getMock(NameIdValidatorInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(NameIdValidatorInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getNameIdValidator());
     }
@@ -71,7 +71,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.binding_factory')
-            ->willReturn($expected = $this->getMock(BindingFactoryInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(BindingFactoryInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getBindingFactory());
     }
@@ -81,7 +81,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.signature_validator')
-            ->willReturn($expected = $this->getMock(SignatureValidatorInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(SignatureValidatorInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getSignatureValidator());
     }
@@ -91,7 +91,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.credential_resolver')
-            ->willReturn($expected = $this->getMock(CredentialResolverInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(CredentialResolverInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getCredentialResolver());
     }
@@ -111,7 +111,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $container = new ServiceContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.service.session_processor')
-            ->willReturn($expected = $this->getMock(SessionProcessorInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(SessionProcessorInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getSessionProcessor());
     }

@@ -15,7 +15,7 @@ class StoreContainerTest extends \PHPUnit_Framework_TestCase
         $container = new StoreContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.store.request')
-            ->willReturn($expected = $this->getMock(RequestStateStoreInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(RequestStateStoreInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getRequestStateStore());
     }
@@ -25,7 +25,7 @@ class StoreContainerTest extends \PHPUnit_Framework_TestCase
         $container = new StoreContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.store.id_state')
-            ->willReturn($expected = $this->getMock(IdStoreInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(IdStoreInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getIdStateStore());
     }
@@ -35,7 +35,7 @@ class StoreContainerTest extends \PHPUnit_Framework_TestCase
         $container = new StoreContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.store.sso_state')
-            ->willReturn($expected = $this->getMock(SsoStateStoreInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(SsoStateStoreInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getSsoStateStore());
     }

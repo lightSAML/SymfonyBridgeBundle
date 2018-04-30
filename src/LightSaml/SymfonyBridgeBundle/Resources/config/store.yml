@@ -6,6 +6,7 @@ parameters:
 services:
     lightsaml.store.request:
         class: LightSaml\Store\Request\RequestStateSessionStore
+        public: true
         arguments:
             - "@session"
             - "%lightsaml.store.request_session_prefix%"
@@ -16,6 +17,7 @@ services:
 
     lightsaml.store.sso_state:
         class: LightSaml\Store\Sso\SsoStateSessionStore
+        public: true
         arguments:
             - "@session"
             - "%lightsaml.store.sso_state_session_key%"
