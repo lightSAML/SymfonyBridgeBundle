@@ -177,13 +177,13 @@ class LightSamlSymfonyBridgeExtension extends Extension
     private function configureStore(ContainerBuilder $container, array $config)
     {
         if (isset($config['store']['request'])) {
-            $container->setAlias('lightsaml.store.request', $config['store']['request']);
+            $container->setDefinition('lightsaml.store.request', new ChildDefinition($config['store']['request']));
         }
         if (isset($config['store']['id_state'])) {
-            $container->setAlias('lightsaml.store.id_state', $config['store']['id_state']);
+            $container->setDefinition('lightsaml.store.id_state', new ChildDefinition($config['store']['id_state']));
         }
         if (isset($config['store']['sso_state'])) {
-            $container->setAlias('lightsaml.store.sso_state', $config['store']['sso_state']);
+            $container->setDefinition('lightsaml.store.sso_state', new ChildDefinition($config['store']['sso_state']));
         }
     }
 
