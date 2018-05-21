@@ -2,15 +2,18 @@
 
 namespace LightSaml\SymfonyBridgeBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
+
 abstract class TestHelper
 {
     /**
-     * @param \PHPUnit_Framework_TestCase $test
+     * @param TestCase $test
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\DependencyInjection\ContainerInterface
      */
-    public static function getContainerMock(\PHPUnit_Framework_TestCase $test)
+    public static function getContainerMock(TestCase $test)
     {
-        return $test->getMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
+        return $test->getMockBuilder(\Symfony\Component\DependencyInjection\ContainerInterface::class)
+            ->getMock();
     }
 }

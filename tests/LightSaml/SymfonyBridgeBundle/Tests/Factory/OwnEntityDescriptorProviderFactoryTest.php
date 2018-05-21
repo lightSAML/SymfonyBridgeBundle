@@ -7,9 +7,10 @@ use LightSaml\Credential\X509CredentialInterface;
 use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\Store\Credential\CredentialStoreInterface;
 use LightSaml\SymfonyBridgeBundle\Factory\OwnEntityDescriptorProviderFactory;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
 
-class OwnEntityDescriptorProviderFactoryTest extends \PHPUnit_Framework_TestCase
+class OwnEntityDescriptorProviderFactoryTest extends TestCase
 {
     public function test_returns_entity_descriptor_builder()
     {

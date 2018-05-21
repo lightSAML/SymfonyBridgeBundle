@@ -3,9 +3,10 @@
 namespace LightSaml\SymfonyBridgeBundle\Tests\DependencyInjection;
 
 use LightSaml\SymfonyBridgeBundle\DependencyInjection\Configuration;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTest extends TestCase
 {
     public function test_passes_with_own_entity_id_only()
     {

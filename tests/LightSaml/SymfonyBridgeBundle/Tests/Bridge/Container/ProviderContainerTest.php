@@ -7,8 +7,9 @@ use LightSaml\Provider\NameID\NameIdProviderInterface;
 use LightSaml\Provider\Session\SessionInfoProviderInterface;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\ProviderContainer;
 use LightSaml\SymfonyBridgeBundle\Tests\TestHelper;
+use PHPUnit\Framework\TestCase;
 
-class ProviderContainerTest extends \PHPUnit_Framework_TestCase
+class ProviderContainerTest extends TestCase
 {
     public function test_returns_attribute_value_provider()
     {

@@ -13,8 +13,9 @@ use LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface;
 use LightSaml\Validator\Model\Assertion\AssertionValidatorInterface;
 use LightSaml\Validator\Model\NameId\NameIdValidatorInterface;
 use LightSaml\Validator\Model\Signature\SignatureValidatorInterface;
+use PHPUnit\Framework\TestCase;
 
-class ServiceContainerTest extends \PHPUnit_Framework_TestCase
+class ServiceContainerTest extends TestCase
 {
     public function test_returns_assertion_validator()
     {

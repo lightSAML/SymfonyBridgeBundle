@@ -3,11 +3,12 @@
 namespace LightSaml\SymfonyBridgeBundle\Tests\DependencyInjection\Compiler;
 
 use LightSaml\SymfonyBridgeBundle\DependencyInjection\Compiler\AddMethodCallCompilerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-class AddMethodCallCompilerPassTest extends \PHPUnit_Framework_TestCase
+class AddMethodCallCompilerPassTest extends TestCase
 {
     public function test_constructs_with_three_strings()
     {

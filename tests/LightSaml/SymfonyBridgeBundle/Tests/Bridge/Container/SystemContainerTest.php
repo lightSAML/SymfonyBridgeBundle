@@ -5,13 +5,14 @@ namespace LightSaml\SymfonyBridgeBundle\Tests\Bridge\Container;
 use LightSaml\Provider\TimeProvider\TimeProviderInterface;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\SystemContainer;
 use LightSaml\SymfonyBridgeBundle\Tests\TestHelper;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class SystemContainerTest extends \PHPUnit_Framework_TestCase
+class SystemContainerTest extends TestCase
 {
     public function test_returns_request_from_stack()
     {

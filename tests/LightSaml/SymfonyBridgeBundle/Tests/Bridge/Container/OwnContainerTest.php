@@ -7,8 +7,9 @@ use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\Store\Credential\CredentialStoreInterface;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\OwnContainer;
 use LightSaml\SymfonyBridgeBundle\Tests\TestHelper;
+use PHPUnit\Framework\TestCase;
 
-class OwnContainerTest extends \PHPUnit_Framework_TestCase
+class OwnContainerTest extends TestCase
 {
     public function test_returns_own_entity_provider()
     {

@@ -7,8 +7,9 @@ use LightSaml\Store\Request\RequestStateStoreInterface;
 use LightSaml\Store\Sso\SsoStateStoreInterface;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\StoreContainer;
 use LightSaml\SymfonyBridgeBundle\Tests\TestHelper;
+use PHPUnit\Framework\TestCase;
 
-class StoreContainerTest extends \PHPUnit_Framework_TestCase
+class StoreContainerTest extends TestCase
 {
     public function test_returns_request_state_store()
     {

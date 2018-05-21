@@ -6,8 +6,9 @@ use LightSaml\Credential\CredentialInterface;
 use LightSaml\Store\Credential\CredentialStoreInterface;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use LightSaml\SymfonyBridgeBundle\Factory\CredentialStoreFactory;
+use PHPUnit\Framework\TestCase;
 
-class CredentialStoreFactoryTest extends \PHPUnit_Framework_TestCase
+class CredentialStoreFactoryTest extends TestCase
 {
     public function test_returns_credential_store()
     {

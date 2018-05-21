@@ -6,8 +6,9 @@ use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use LightSaml\Store\TrustOptions\TrustOptionsStoreInterface;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\PartyContainer;
 use LightSaml\SymfonyBridgeBundle\Tests\TestHelper;
+use PHPUnit\Framework\TestCase;
 
-class PartyContainerTest extends \PHPUnit_Framework_TestCase
+class PartyContainerTest extends TestCase
 {
     public function test_returns_idp_entity_descriptor_store()
     {

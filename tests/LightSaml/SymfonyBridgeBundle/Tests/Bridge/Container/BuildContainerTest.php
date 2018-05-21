@@ -11,8 +11,9 @@ use LightSaml\SymfonyBridgeBundle\Bridge\Container\ServiceContainer;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\StoreContainer;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\SystemContainer;
 use LightSaml\SymfonyBridgeBundle\Tests\TestHelper;
+use PHPUnit\Framework\TestCase;
 
-class BuildContainerTest extends \PHPUnit_Framework_TestCase
+class BuildContainerTest extends TestCase
 {
     public function test_constructs_with_container()
     {

@@ -3,10 +3,11 @@
 namespace LightSaml\SymfonyBridgeBundle\Tests\DependencyInjection;
 
 use LightSaml\SymfonyBridgeBundle\DependencyInjection\LightSamlSymfonyBridgeExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-class LightSamlSymfonyBridgeExtensionTest extends \PHPUnit_Framework_TestCase
+class LightSamlSymfonyBridgeExtensionTest extends TestCase
 {
     public function test_loads_with_configuration()
     {
