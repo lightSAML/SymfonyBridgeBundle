@@ -16,7 +16,7 @@ class ProviderContainerTest extends TestCase
         $container = new ProviderContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.provider.attribute_value')
-            ->willReturn($expected = $this->getMock(AttributeValueProviderInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(AttributeValueProviderInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getAttributeValueProvider());
     }
@@ -26,7 +26,7 @@ class ProviderContainerTest extends TestCase
         $container = new ProviderContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.provider.session_info')
-            ->willReturn($expected = $this->getMock(SessionInfoProviderInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(SessionInfoProviderInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getSessionInfoProvider());
     }
@@ -36,7 +36,7 @@ class ProviderContainerTest extends TestCase
         $container = new ProviderContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.provider.name_id')
-            ->willReturn($expected = $this->getMock(NameIdProviderInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(NameIdProviderInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getNameIdProvider());
     }

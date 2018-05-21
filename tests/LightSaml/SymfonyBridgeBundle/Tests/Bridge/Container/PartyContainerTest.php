@@ -15,7 +15,7 @@ class PartyContainerTest extends TestCase
         $container = new PartyContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.party.idp_entity_descriptor_store')
-            ->willReturn($expected = $this->getMock(EntityDescriptorStoreInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(EntityDescriptorStoreInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getIdpEntityDescriptorStore());
     }
@@ -25,7 +25,7 @@ class PartyContainerTest extends TestCase
         $container = new PartyContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.party.sp_entity_descriptor_store')
-            ->willReturn($expected = $this->getMock(EntityDescriptorStoreInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(EntityDescriptorStoreInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getSpEntityDescriptorStore());
     }
@@ -35,7 +35,7 @@ class PartyContainerTest extends TestCase
         $container = new PartyContainer($containerMock = TestHelper::getContainerMock($this));
         $containerMock->method('get')
             ->with('lightsaml.party.trust_options_store')
-            ->willReturn($expected = $this->getMock(TrustOptionsStoreInterface::class));
+            ->willReturn($expected = $this->getMockBuilder(TrustOptionsStoreInterface::class)->getMock());
 
         $this->assertSame($expected, $container->getTrustOptionsStore());
     }

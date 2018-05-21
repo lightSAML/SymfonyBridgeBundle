@@ -16,19 +16,19 @@ class OwnEntityDescriptorProviderFactoryTest extends TestCase
     {
         $factory = new OwnEntityDescriptorProviderFactory();
 
-        $routerMock = $this->getMock(RouterInterface::class);
+        $routerMock = $this->getMockBuilder(RouterInterface::class)->getMock();
         $routerMock->expects($this->exactly(2))
             ->method('generate')
             ->with($this->isType('string'), [], RouterInterface::ABSOLUTE_URL)
             ->willReturn('http://localhost');
 
-        $credentialStoreMock = $this->getMock(CredentialStoreInterface::class);
+        $credentialStoreMock = $this->getMockBuilder(CredentialStoreInterface::class)->getMock();
         $credentialStoreMock->method('getByEntityId')
             ->with($ownEntityId = 'own-id')
-            ->willReturn([$credentialMock = $this->getMock(X509CredentialInterface::class)]);
+            ->willReturn([$credentialMock = $this->getMockBuilder(X509CredentialInterface::class)->getMock()]);
 
         $credentialMock->method('getCertificate')
-            ->willReturn($this->getMock(X509Certificate::class));
+            ->willReturn($this->getMockBuilder(X509Certificate::class)->getMock());
 
         $value = $factory->build(
             $ownEntityId,
