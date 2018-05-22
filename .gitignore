@@ -38,3 +38,5 @@
 /composer.lock
 /*.phar
 /*.cache
+
+tests/LightSaml/SymfonyBridgeBundle/Tests/Functional/cache/*

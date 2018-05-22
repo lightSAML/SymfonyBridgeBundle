@@ -19,18 +19,54 @@ use LightSaml\Build\Container\ProviderContainerInterface;
 use LightSaml\Build\Container\ServiceContainerInterface;
 use LightSaml\Build\Container\StoreContainerInterface;
 use LightSaml\Build\Container\SystemContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BuildContainer extends AbstractContainer implements BuildContainerInterface
 {
+    /** @var SystemContainerInterface */
+    private $systemsystemContainer;
+
+    /** @var PartyContainerInterface */
+    private $partypartyContainer;
+
+    /** @var StoreContainerInterface */
+    private $storeContainer;
+
+    /** @var OwnContainerInterface */
+    private $ownContainer;
+
     /** @var AbstractContainer[] */
     private $containers = [];
+
+    /** @var ProviderContainerInterface */
+    private $providerContainer;
+
+    /**
+     * @param ContainerInterface    $container
+     * @param OwnContainerInterface $ownContainer
+     */
+    public function __construct(ContainerInterface $container,
+        SystemContainerInterface $systemContainer,
+        PartyContainerInterface $partyContainer,
+        StoreContainerInterface $storeContainer,
+        ProviderContainerInterface $providerContainer,
+        OwnContainerInterface $ownContainer
+    ) {
+        parent::__construct($container);
+
+        $this->systemsystemContainer = $systemContainer;
+        $this->partypartyContainer = $partyContainer;
+        $this->storeContainer = $storeContainer;
+        $this->providerContainer = $providerContainer;
+        $this->ownContainer = $ownContainer;
+    }
 
     /**
      * @return SystemContainerInterface
      */
     public function getSystemContainer()
     {
-        return $this->getContainer(SystemContainer::class);
+        return $this->systemsystemContainer;
     }
 
     /**
@@ -38,7 +74,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getPartyContainer()
     {
-        return $this->getContainer(PartyContainer::class);
+        return $this->partypartyContainer;
     }
 
     /**
@@ -46,7 +82,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getStoreContainer()
     {
-        return $this->getContainer(StoreContainer::class);
+        return $this->storeContainer;
     }
 
     /**
@@ -54,7 +90,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getProviderContainer()
     {
-        return $this->getContainer(ProviderContainer::class);
+        return $this->providerContainer;
     }
 
     /**
@@ -78,7 +114,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getOwnContainer()
     {
-        return $this->getContainer(OwnContainer::class);
+        return $this->ownContainer;
     }
 
     /**

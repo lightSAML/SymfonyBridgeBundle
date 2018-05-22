@@ -15,14 +15,38 @@ use LightSaml\Build\Container\PartyContainerInterface;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use LightSaml\Store\TrustOptions\TrustOptionsStoreInterface;
 
-class PartyContainer extends AbstractContainer implements PartyContainerInterface
+class PartyContainer implements PartyContainerInterface
 {
+    /** @var EntityDescriptorStoreInterface */
+    private $idpEntityDescriptorStore;
+
+    /** @var EntityDescriptorStoreInterface */
+    private $spEntityDescriptorStore;
+
+    /** @var TrustOptionsStoreInterface */
+    private $trustOptionsStore;
+
+    /**
+     * @param EntityDescriptorStoreInterface $idpEntityDescriptorStore
+     * @param EntityDescriptorStoreInterface $spEntityDescriptorStore
+     * @param TrustOptionsStoreInterface     $trustOptionsStore
+     */
+    public function __construct(
+        EntityDescriptorStoreInterface $idpEntityDescriptorStore,
+        EntityDescriptorStoreInterface $spEntityDescriptorStore,
+        TrustOptionsStoreInterface $trustOptionsStore
+    ) {
+        $this->idpEntityDescriptorStore = $idpEntityDescriptorStore;
+        $this->spEntityDescriptorStore = $spEntityDescriptorStore;
+        $this->trustOptionsStore = $trustOptionsStore;
+    }
+
     /**
      * @return EntityDescriptorStoreInterface
      */
     public function getIdpEntityDescriptorStore()
     {
-        return $this->container->get('lightsaml.party.idp_entity_descriptor_store');
+        return $this->idpEntityDescriptorStore;
     }
 
     /**
@@ -30,7 +54,7 @@ class PartyContainer extends AbstractContainer implements PartyContainerInterfac
      */
     public function getSpEntityDescriptorStore()
     {
-        return $this->container->get('lightsaml.party.sp_entity_descriptor_store');
+        return $this->spEntityDescriptorStore;
     }
 
     /**
@@ -38,6 +62,6 @@ class PartyContainer extends AbstractContainer implements PartyContainerInterfac
      */
     public function getTrustOptionsStore()
     {
-        return $this->container->get('lightsaml.party.trust_options_store');
+        return $this->trustOptionsStore;
     }
 }

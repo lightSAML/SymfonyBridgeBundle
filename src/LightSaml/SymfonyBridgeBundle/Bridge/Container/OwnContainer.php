@@ -14,15 +14,37 @@ namespace LightSaml\SymfonyBridgeBundle\Bridge\Container;
 use LightSaml\Build\Container\OwnContainerInterface;
 use LightSaml\Credential\CredentialInterface;
 use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
+use LightSaml\Store\Credential\CredentialStoreInterface;
 
-class OwnContainer extends AbstractContainer implements OwnContainerInterface
+class OwnContainer implements OwnContainerInterface
 {
+    /** @var EntityDescriptorProviderInterface */
+    private $entityDescriptorProvider;
+
+    /** @var CredentialStoreInterface */
+    private $credentialStore;
+
+    /** @var string */
+    private $entityId;
+
+    /**
+     * @param EntityDescriptorProviderInterface $entityDescriptorProvider
+     * @param CredentialStoreInterface          $credentialStore
+     * @param string                            $entityId
+     */
+    public function __construct(EntityDescriptorProviderInterface $entityDescriptorProvider, CredentialStoreInterface $credentialStore, $entityId)
+    {
+        $this->entityDescriptorProvider = $entityDescriptorProvider;
+        $this->credentialStore = $credentialStore;
+        $this->entityId = $entityId;
+    }
+
     /**
      * @return EntityDescriptorProviderInterface
      */
     public function getOwnEntityDescriptorProvider()
     {
-        return $this->container->get('lightsaml.own.entity_descriptor_provider');
+        return $this->entityDescriptorProvider;
     }
 
     /**
@@ -30,8 +52,8 @@ class OwnContainer extends AbstractContainer implements OwnContainerInterface
      */
     public function getOwnCredentials()
     {
-        return $this->container->get('lightsaml.own.credential_store')->getByEntityId(
-            $this->container->getParameter('lightsaml.own.entity_id')
+        return $this->credentialStore->getByEntityId(
+            $this->entityId
         );
     }
 }

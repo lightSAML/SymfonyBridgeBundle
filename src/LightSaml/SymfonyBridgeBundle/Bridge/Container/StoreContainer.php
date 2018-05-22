@@ -16,14 +16,38 @@ use LightSaml\Store\Id\IdStoreInterface;
 use LightSaml\Store\Request\RequestStateStoreInterface;
 use LightSaml\Store\Sso\SsoStateStoreInterface;
 
-class StoreContainer extends AbstractContainer implements StoreContainerInterface
+class StoreContainer implements StoreContainerInterface
 {
+    /** @var RequestStateStoreInterface */
+    private $requestStateStore;
+
+    /** @var IdStoreInterface */
+    private $idStateStore;
+
+    /** @var SsoStateStoreInterface */
+    private $ssoStateStore;
+
+    /**
+     * @param RequestStateStoreInterface $requestStateStore
+     * @param IdStoreInterface           $idStateStore
+     * @param SsoStateStoreInterface     $ssoStateStore
+     */
+    public function __construct(
+        RequestStateStoreInterface $requestStateStore,
+        IdStoreInterface $idStateStore,
+        SsoStateStoreInterface $ssoStateStore
+    ) {
+        $this->requestStateStore = $requestStateStore;
+        $this->idStateStore = $idStateStore;
+        $this->ssoStateStore = $ssoStateStore;
+    }
+
     /**
      * @return RequestStateStoreInterface
      */
     public function getRequestStateStore()
     {
-        return $this->container->get('lightsaml.store.request');
+        return $this->requestStateStore;
     }
 
     /**
@@ -31,7 +55,7 @@ class StoreContainer extends AbstractContainer implements StoreContainerInterfac
      */
     public function getIdStateStore()
     {
-        return $this->container->get('lightsaml.store.id_state');
+        return $this->idStateStore;
     }
 
     /**
@@ -39,6 +63,6 @@ class StoreContainer extends AbstractContainer implements StoreContainerInterfac
      */
     public function getSsoStateStore()
     {
-        return $this->container->get('lightsaml.store.sso_state');
+        return $this->ssoStateStore;
     }
 }
