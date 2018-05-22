@@ -3,11 +3,12 @@ services:
         class: LightSaml\SymfonyBridgeBundle\Bridge\Container\BuildContainer
         public: true
         arguments:
-            - "@service_container"
             - "@lightsaml.container.system"
             - "@lightsaml.container.party"
             - "@lightsaml.container.store"
             - "@lightsaml.container.provider"
+            - "@lightsaml.container.credential"
+            - "@lightsaml.container.service"
             - "@lightsaml.container.own"
 
     lightsaml.container.system:
@@ -40,6 +41,23 @@ services:
             - "@lightsaml.provider.session_info"
             - "@lightsaml.provider.name_id"
 
+    lightsaml.container.credential:
+        class: LightSaml\SymfonyBridgeBundle\Bridge\Container\CredentialContainer
+        arguments:
+            - "@lightsaml.credential.credential_store"
+
+    lightsaml.container.service:
+        class: LightSaml\SymfonyBridgeBundle\Bridge\Container\ServiceContainer
+        arguments:
+            - "@lightsaml.service.assertion_validator"
+            - "@lightsaml.service.assertion_time_validator"
+            - "@lightsaml.service.signature_resolver"
+            - "@lightsaml.service.endpoint_resolver"
+            - "@lightsaml.service.name_id_validator"
+            - "@lightsaml.service.binding_factory"
+            - "@lightsaml.service.signature_validator"
+            - "@lightsaml.service.credential_resolver"
+            - "@lightsaml.service.session_processor"
 
     lightsaml.container.own:
         class: LightSaml\SymfonyBridgeBundle\Bridge\Container\OwnContainer

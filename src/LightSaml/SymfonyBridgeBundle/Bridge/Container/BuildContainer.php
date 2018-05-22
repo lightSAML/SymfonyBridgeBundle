@@ -21,7 +21,7 @@ use LightSaml\Build\Container\StoreContainerInterface;
 use LightSaml\Build\Container\SystemContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class BuildContainer extends AbstractContainer implements BuildContainerInterface
+class BuildContainer implements BuildContainerInterface
 {
     /** @var SystemContainerInterface */
     private $systemsystemContainer;
@@ -35,29 +35,39 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
     /** @var OwnContainerInterface */
     private $ownContainer;
 
-    /** @var AbstractContainer[] */
-    private $containers = [];
-
     /** @var ProviderContainerInterface */
     private $providerContainer;
 
+    /** @var ServiceContainerInterface */
+    private $serviceContainer;
+
+    /** @var CredentialContainerInterface */
+    private $credentialContainer;
+
     /**
-     * @param ContainerInterface    $container
+     * @param SystemContainerInterface $systemContainer
+     * @param PartyContainerInterface $partyContainer
+     * @param StoreContainerInterface $storeContainer
+     * @param ProviderContainerInterface $providerContainer
+     * @param CredentialContainerInterface $credentialContainer
+     * @param ServiceContainerInterface $serviceContainer
      * @param OwnContainerInterface $ownContainer
      */
-    public function __construct(ContainerInterface $container,
+    public function __construct(
         SystemContainerInterface $systemContainer,
         PartyContainerInterface $partyContainer,
         StoreContainerInterface $storeContainer,
         ProviderContainerInterface $providerContainer,
+        CredentialContainerInterface $credentialContainer,
+        ServiceContainerInterface $serviceContainer,
         OwnContainerInterface $ownContainer
     ) {
-        parent::__construct($container);
-
         $this->systemsystemContainer = $systemContainer;
         $this->partypartyContainer = $partyContainer;
         $this->storeContainer = $storeContainer;
         $this->providerContainer = $providerContainer;
+        $this->credentialContainer = $credentialContainer;
+        $this->serviceContainer = $serviceContainer;
         $this->ownContainer = $ownContainer;
     }
 
@@ -98,7 +108,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getCredentialContainer()
     {
-        return $this->getContainer(CredentialContainer::class);
+        return $this->credentialContainer;
     }
 
     /**
@@ -106,7 +116,7 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
      */
     public function getServiceContainer()
     {
-        return $this->getContainer(ServiceContainer::class);
+        return $this->serviceContainer;
     }
 
     /**
@@ -115,19 +125,5 @@ class BuildContainer extends AbstractContainer implements BuildContainerInterfac
     public function getOwnContainer()
     {
         return $this->ownContainer;
-    }
-
-    /**
-     * @param string $class
-     *
-     * @return AbstractContainer
-     */
-    private function getContainer($class)
-    {
-        if (false === isset($this->containers[$class])) {
-            $this->containers[$class] = new $class($this->container);
-        }
-
-        return $this->containers[$class];
     }
 }

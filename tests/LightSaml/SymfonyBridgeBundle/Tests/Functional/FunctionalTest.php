@@ -2,6 +2,7 @@
 
 namespace LightSaml\SymfonyBridgeBundle\Tests\Functional;
 
+use LightSaml\Binding\BindingFactoryInterface;
 use LightSaml\Build\Container\BuildContainerInterface;
 use LightSaml\Build\Container\OwnContainerInterface;
 use LightSaml\Build\Container\PartyContainerInterface;
@@ -13,11 +14,20 @@ use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\Provider\NameID\NameIdProviderInterface;
 use LightSaml\Provider\Session\SessionInfoProviderInterface;
 use LightSaml\Provider\TimeProvider\TimeProviderInterface;
+use LightSaml\Resolver\Credential\CredentialResolverInterface;
+use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
+use LightSaml\Resolver\Session\SessionProcessorInterface;
+use LightSaml\Resolver\Signature\SignatureResolverInterface;
+use LightSaml\Store\Credential\CredentialStoreInterface;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use LightSaml\Store\Id\IdStoreInterface;
 use LightSaml\Store\Request\RequestStateStoreInterface;
 use LightSaml\Store\Sso\SsoStateStoreInterface;
 use LightSaml\Store\TrustOptions\TrustOptionsStoreInterface;
+use LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface;
+use LightSaml\Validator\Model\Assertion\AssertionValidatorInterface;
+use LightSaml\Validator\Model\NameId\NameIdValidatorInterface;
+use LightSaml\Validator\Model\Signature\SignatureValidatorInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -83,6 +93,32 @@ class FunctionalTest extends WebTestCase
         $this->assertInstanceOf(AttributeValueProviderInterface::class, $providerContainer->getAttributeValueProvider());
         $this->assertInstanceOf(SessionInfoProviderInterface::class, $providerContainer->getSessionInfoProvider());
         $this->assertInstanceOf(NameIdProviderInterface::class, $providerContainer->getNameIdProvider());
+    }
+
+    public function test_credential_container()
+    {
+        static::bootKernel();
+        /** @var BuildContainerInterface $buildContainer */
+        $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
+        $credentialContainer = $buildContainer->getCredentialContainer();
+        $this->assertInstanceOf(CredentialStoreInterface::class, $credentialContainer->getCredentialStore());
+    }
+
+    public function test_service_container()
+    {
+        static::bootKernel();
+        /** @var BuildContainerInterface $buildContainer */
+        $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
+        $serviceContainer = $buildContainer->getServiceContainer();
+        $this->assertInstanceOf(AssertionValidatorInterface::class, $serviceContainer->getAssertionValidator());
+        $this->assertInstanceOf(AssertionTimeValidatorInterface::class, $serviceContainer->getAssertionTimeValidator());
+        $this->assertInstanceOf(SignatureResolverInterface::class, $serviceContainer->getSignatureResolver());
+        $this->assertInstanceOf(EndpointResolverInterface::class, $serviceContainer->getEndpointResolver());
+        $this->assertInstanceOf(NameIdValidatorInterface::class, $serviceContainer->getNameIdValidator());
+        $this->assertInstanceOf(BindingFactoryInterface::class, $serviceContainer->getBindingFactory());
+        $this->assertInstanceOf(SignatureValidatorInterface::class, $serviceContainer->getSignatureValidator());
+        $this->assertInstanceOf(CredentialResolverInterface::class, $serviceContainer->getCredentialResolver());
+        $this->assertInstanceOf(SessionProcessorInterface::class, $serviceContainer->getSessionProcessor());
     }
 
 
