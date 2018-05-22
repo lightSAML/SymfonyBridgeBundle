@@ -52,15 +52,15 @@ class ServiceContainer implements ServiceContainerInterface
     private $sessionProcessor;
 
     /**
-     * @param AssertionValidatorInterface $assertionValidator
+     * @param AssertionValidatorInterface     $assertionValidator
      * @param AssertionTimeValidatorInterface $assertionTimeValidator
-     * @param SignatureResolverInterface $signatureResolver
-     * @param EndpointResolverInterface $endpointResolver
-     * @param NameIdValidatorInterface $nameIdValidator
-     * @param BindingFactoryInterface $bindingFactory
-     * @param SignatureValidatorInterface $signatureValidator
-     * @param CredentialResolverInterface $credentialResolver
-     * @param SessionProcessorInterface $sessionProcessor
+     * @param SignatureResolverInterface      $signatureResolver
+     * @param EndpointResolverInterface       $endpointResolver
+     * @param NameIdValidatorInterface        $nameIdValidator
+     * @param BindingFactoryInterface         $bindingFactory
+     * @param SignatureValidatorInterface     $signatureValidator
+     * @param CredentialResolverInterface     $credentialResolver
+     * @param SessionProcessorInterface       $sessionProcessor
      */
     public function __construct(
         AssertionValidatorInterface $assertionValidator,
@@ -153,7 +153,7 @@ class ServiceContainer implements ServiceContainerInterface
      */
     public function getLogoutSessionResolver()
     {
-        throw new \LogicException("Not implemented");
+        throw new \LogicException('Not implemented');
     }
 
     /**
