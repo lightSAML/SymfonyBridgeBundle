@@ -38,6 +38,12 @@ class FunctionalTest extends WebTestCase
     {
         parent::setUp();
         $_SERVER['KERNEL_CLASS'] = TestKernel::class;
+        $_SERVER['KERNEL_DIR'] = __DIR__;
+    }
+
+    protected static function getKernelClass()
+    {
+        return TestKernel::class;
     }
 
     public function test_build_container()
