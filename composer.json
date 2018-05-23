@@ -28,6 +28,8 @@
     "require-dev": {
         "symfony/browser-kit": "~2.7|~3.0|~4.0",
         "symfony/finder": "~2.7|~3.0|~4.0",
+        "symfony/filesystem": "~2.7|~3.0|~4.0",
+        "symfony/routing": "~2.7|~3.0|~4.0",
         "phpunit/phpunit": "^5.7",
         "php-coveralls/php-coveralls": "~2.0"
     },

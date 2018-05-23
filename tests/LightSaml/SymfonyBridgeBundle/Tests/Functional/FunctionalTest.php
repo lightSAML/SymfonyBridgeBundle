@@ -31,6 +31,7 @@ use LightSaml\Validator\Model\Signature\SignatureValidatorInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class FunctionalTest extends WebTestCase
 {
@@ -39,6 +40,8 @@ class FunctionalTest extends WebTestCase
         parent::setUp();
         $_SERVER['KERNEL_CLASS'] = TestKernel::class;
         $_SERVER['KERNEL_DIR'] = __DIR__;
+        $fs = new Filesystem();
+        $fs->remove(__DIR__.'/cache');
     }
 
     protected static function getKernelClass()

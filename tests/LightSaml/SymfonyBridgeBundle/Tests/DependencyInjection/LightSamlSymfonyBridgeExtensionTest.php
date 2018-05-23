@@ -257,11 +257,12 @@ class LightSamlSymfonyBridgeExtensionTest extends TestCase
         $this->assertEquals($expectedAlias, (string) $containerBuilder->getAlias('lightsaml.system.event_dispatcher'));
     }
 
-    public function test_loads_system_logger()
+    public function test_loads_system_logger_when_given_in_config()
     {
         $containerBuilder = new ContainerBuilder(new ParameterBag());
         $extension = new LightSamlSymfonyBridgeExtension();
         $config = $this->getDefaultConfig();
+        $config['light_saml_symfony_bridge']['system']['logger'] = 'some.logger';
 
         $extension->load($config, $containerBuilder);
 
