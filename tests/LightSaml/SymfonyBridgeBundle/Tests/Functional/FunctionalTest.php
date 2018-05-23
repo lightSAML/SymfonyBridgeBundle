@@ -42,7 +42,7 @@ class FunctionalTest extends WebTestCase
 
     public function test_build_container()
     {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $this->assertInstanceOf(BuildContainerInterface::class, $buildContainer);
@@ -53,7 +53,7 @@ class FunctionalTest extends WebTestCase
     }
 
     public function test_system_container() {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $systemContainer = $buildContainer->getSystemContainer();
@@ -64,7 +64,7 @@ class FunctionalTest extends WebTestCase
 
     public function test_party_container()
     {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $partyContainer = $buildContainer->getPartyContainer();
@@ -75,7 +75,7 @@ class FunctionalTest extends WebTestCase
 
     public function test_store_container()
     {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $storeContainer = $buildContainer->getStoreContainer();
@@ -86,7 +86,7 @@ class FunctionalTest extends WebTestCase
 
     public function test_provider_container()
     {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $providerContainer = $buildContainer->getProviderContainer();
@@ -97,7 +97,7 @@ class FunctionalTest extends WebTestCase
 
     public function test_credential_container()
     {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $credentialContainer = $buildContainer->getCredentialContainer();
@@ -106,7 +106,7 @@ class FunctionalTest extends WebTestCase
 
     public function test_service_container()
     {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $serviceContainer = $buildContainer->getServiceContainer();
@@ -124,7 +124,7 @@ class FunctionalTest extends WebTestCase
 
     public function test_own_container()
     {
-        static::bootKernel();
+        static::createClient();
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $ownContainer = $buildContainer->getOwnContainer();
