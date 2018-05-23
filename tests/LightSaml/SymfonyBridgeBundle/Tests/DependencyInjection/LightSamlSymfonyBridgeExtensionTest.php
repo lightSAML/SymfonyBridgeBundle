@@ -282,6 +282,29 @@ class LightSamlSymfonyBridgeExtensionTest extends TestCase
         $this->assertEquals($expectedAlias, (string) $containerBuilder->getAlias('lightsaml.system.logger'));
     }
 
+    public function profile_provider()
+    {
+        return [
+            ['ligthsaml.profile.metadata'],
+            ['ligthsaml.profile.login_factory'],
+            ['ligthsaml.profile.acs'],
+        ];
+    }
+    /**
+     * @dataProvider profile_provider
+     */
+    public function test_loads_public_profile($id)
+    {
+        $containerBuilder = new ContainerBuilder(new ParameterBag());
+        $extension = new LightSamlSymfonyBridgeExtension();
+        $config = $this->getDefaultConfig();
+        $extension->load($config, $containerBuilder);
+
+        $this->assertTrue($containerBuilder->hasDefinition('ligthsaml.profile.metadata'));
+        $defn = $containerBuilder->getDefinition('ligthsaml.profile.metadata');
+        $this->assertTrue($defn->isPublic());
+    }
+
     private function getDefaultConfig()
     {
         return [
