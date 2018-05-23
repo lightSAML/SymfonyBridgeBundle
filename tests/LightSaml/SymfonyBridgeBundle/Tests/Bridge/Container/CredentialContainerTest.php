@@ -4,17 +4,14 @@ namespace LightSaml\SymfonyBridgeBundle\Tests\Bridge\Container;
 
 use LightSaml\Store\Credential\CredentialStoreInterface;
 use LightSaml\SymfonyBridgeBundle\Bridge\Container\CredentialContainer;
-use LightSaml\SymfonyBridgeBundle\Tests\TestHelper;
+use PHPUnit\Framework\TestCase;
 
-class CredentialContainerTest extends \PHPUnit_Framework_TestCase
+class CredentialContainerTest extends TestCase
 {
-    public function test_returns_credential_store()
+    public function test_constructs_with_all_arguments()
     {
-        $container = new CredentialContainer($containerMock = TestHelper::getContainerMock($this));
-        $containerMock->method('get')
-            ->with('lightsaml.credential.credential_store')
-            ->willReturn($expected = $this->getMock(CredentialStoreInterface::class));
-
-        $this->assertSame($expected, $container->getCredentialStore());
+        new CredentialContainer(
+            $this->getMockBuilder(CredentialStoreInterface::class)->getMock()
+        );
     }
 }

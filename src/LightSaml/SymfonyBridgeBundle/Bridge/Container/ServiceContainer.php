@@ -17,27 +17,87 @@ use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
 use LightSaml\Resolver\Session\SessionProcessorInterface;
 use LightSaml\Resolver\Signature\SignatureResolverInterface;
-use LightSaml\Validator\Model\Assertion\AssertionTimeValidator;
+use LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface;
 use LightSaml\Validator\Model\Assertion\AssertionValidatorInterface;
 use LightSaml\Validator\Model\NameId\NameIdValidatorInterface;
 use LightSaml\Validator\Model\Signature\SignatureValidatorInterface;
 
-class ServiceContainer extends AbstractContainer implements ServiceContainerInterface
+class ServiceContainer implements ServiceContainerInterface
 {
+    /** @var AssertionValidatorInterface */
+    private $assertionValidator;
+
+    /** @var AssertionTimeValidatorInterface */
+    private $assertionTimeValidator;
+
+    /** @var SignatureResolverInterface */
+    private $signatureResolver;
+
+    /** @var EndpointResolverInterface */
+    private $endpointResolver;
+
+    /** @var NameIdValidatorInterface */
+    private $nameIdValidator;
+
+    /** @var BindingFactoryInterface */
+    private $bindingFactory;
+
+    /** @var SignatureValidatorInterface */
+    private $signatureValidator;
+
+    /** @var CredentialResolverInterface */
+    private $credentialResolver;
+
+    /** @var SessionProcessorInterface */
+    private $sessionProcessor;
+
+    /**
+     * @param AssertionValidatorInterface     $assertionValidator
+     * @param AssertionTimeValidatorInterface $assertionTimeValidator
+     * @param SignatureResolverInterface      $signatureResolver
+     * @param EndpointResolverInterface       $endpointResolver
+     * @param NameIdValidatorInterface        $nameIdValidator
+     * @param BindingFactoryInterface         $bindingFactory
+     * @param SignatureValidatorInterface     $signatureValidator
+     * @param CredentialResolverInterface     $credentialResolver
+     * @param SessionProcessorInterface       $sessionProcessor
+     */
+    public function __construct(
+        AssertionValidatorInterface $assertionValidator,
+        AssertionTimeValidatorInterface $assertionTimeValidator,
+        SignatureResolverInterface $signatureResolver,
+        EndpointResolverInterface $endpointResolver,
+        NameIdValidatorInterface $nameIdValidator,
+        BindingFactoryInterface $bindingFactory,
+        SignatureValidatorInterface $signatureValidator,
+        CredentialResolverInterface $credentialResolver,
+        SessionProcessorInterface $sessionProcessor
+    ) {
+        $this->assertionValidator = $assertionValidator;
+        $this->assertionTimeValidator = $assertionTimeValidator;
+        $this->signatureResolver = $signatureResolver;
+        $this->endpointResolver = $endpointResolver;
+        $this->nameIdValidator = $nameIdValidator;
+        $this->bindingFactory = $bindingFactory;
+        $this->signatureValidator = $signatureValidator;
+        $this->credentialResolver = $credentialResolver;
+        $this->sessionProcessor = $sessionProcessor;
+    }
+
     /**
      * @return AssertionValidatorInterface
      */
     public function getAssertionValidator()
     {
-        return $this->container->get('lightsaml.service.assertion_validator');
+        return $this->assertionValidator;
     }
 
     /**
-     * @return AssertionTimeValidator
+     * @return AssertionTimeValidatorInterface
      */
     public function getAssertionTimeValidator()
     {
-        return $this->container->get('lightsaml.service.assertion_time_validator');
+        return $this->assertionTimeValidator;
     }
 
     /**
@@ -45,7 +105,7 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getSignatureResolver()
     {
-        return $this->container->get('lightsaml.service.signature_resolver');
+        return $this->signatureResolver;
     }
 
     /**
@@ -53,7 +113,7 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getEndpointResolver()
     {
-        return $this->container->get('lightsaml.service.endpoint_resolver');
+        return $this->endpointResolver;
     }
 
     /**
@@ -61,7 +121,7 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getNameIdValidator()
     {
-        return $this->container->get('lightsaml.service.name_id_validator');
+        return $this->nameIdValidator;
     }
 
     /**
@@ -69,7 +129,7 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getBindingFactory()
     {
-        return $this->container->get('lightsaml.service.binding_factory');
+        return $this->bindingFactory;
     }
 
     /**
@@ -77,7 +137,7 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getSignatureValidator()
     {
-        return $this->container->get('lightsaml.service.signature_validator');
+        return $this->signatureValidator;
     }
 
     /**
@@ -85,7 +145,7 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getCredentialResolver()
     {
-        return $this->container->get('lightsaml.service.credential_resolver');
+        return $this->credentialResolver;
     }
 
     /**
@@ -93,7 +153,7 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getLogoutSessionResolver()
     {
-        return $this->container->get('lightsaml.service.logout_resolver');
+        throw new \LogicException('Not implemented');
     }
 
     /**
@@ -101,6 +161,6 @@ class ServiceContainer extends AbstractContainer implements ServiceContainerInte
      */
     public function getSessionProcessor()
     {
-        return $this->container->get('lightsaml.service.session_processor');
+        return $this->sessionProcessor;
     }
 }

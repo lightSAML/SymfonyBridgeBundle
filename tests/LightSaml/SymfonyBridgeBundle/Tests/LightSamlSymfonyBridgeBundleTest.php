@@ -4,10 +4,11 @@ namespace LightSaml\SymfonyBridgeBundle\Tests;
 
 use LightSaml\SymfonyBridgeBundle\DependencyInjection\Compiler\AddMethodCallCompilerPass;
 use LightSaml\SymfonyBridgeBundle\LightSamlSymfonyBridgeBundle;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-class LightSamlSymfonyBridgeBundleTest extends \PHPUnit_Framework_TestCase
+class LightSamlSymfonyBridgeBundleTest extends TestCase
 {
     public function build_adds_own_credential_store_compiler_pass_provider()
     {

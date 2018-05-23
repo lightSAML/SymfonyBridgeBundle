@@ -16,14 +16,38 @@ use LightSaml\Provider\Attribute\AttributeValueProviderInterface;
 use LightSaml\Provider\NameID\NameIdProviderInterface;
 use LightSaml\Provider\Session\SessionInfoProviderInterface;
 
-class ProviderContainer extends AbstractContainer implements ProviderContainerInterface
+class ProviderContainer implements ProviderContainerInterface
 {
+    /** @var AttributeValueProviderInterface */
+    private $attributeValueProvider;
+
+    /** @var SessionInfoProviderInterface */
+    private $sessionInfoProvider;
+
+    /** @var NameIdProviderInterface */
+    private $nameIdProvider;
+
+    /**
+     * @param AttributeValueProviderInterface $attributeValueProvider
+     * @param SessionInfoProviderInterface    $sessionInfoProvider
+     * @param NameIdProviderInterface         $nameIdProvider
+     */
+    public function __construct(
+        AttributeValueProviderInterface $attributeValueProvider,
+        SessionInfoProviderInterface $sessionInfoProvider,
+        NameIdProviderInterface $nameIdProvider
+    ) {
+        $this->attributeValueProvider = $attributeValueProvider;
+        $this->sessionInfoProvider = $sessionInfoProvider;
+        $this->nameIdProvider = $nameIdProvider;
+    }
+
     /**
      * @return AttributeValueProviderInterface
      */
     public function getAttributeValueProvider()
     {
-        return $this->container->get('lightsaml.provider.attribute_value');
+        return $this->attributeValueProvider;
     }
 
     /**
@@ -31,7 +55,7 @@ class ProviderContainer extends AbstractContainer implements ProviderContainerIn
      */
     public function getSessionInfoProvider()
     {
-        return $this->container->get('lightsaml.provider.session_info');
+        return $this->sessionInfoProvider;
     }
 
     /**
@@ -39,11 +63,6 @@ class ProviderContainer extends AbstractContainer implements ProviderContainerIn
      */
     public function getNameIdProvider()
     {
-        return $this->container->get('lightsaml.provider.name_id');
-    }
-
-    public function getAttributeNameProvider()
-    {
-        return $this->container->get('lightsaml.provider.attribute_name');
+        return $this->nameIdProvider;
     }
 }

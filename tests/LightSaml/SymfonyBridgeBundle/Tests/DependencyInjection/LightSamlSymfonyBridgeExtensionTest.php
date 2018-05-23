@@ -3,10 +3,11 @@
 namespace LightSaml\SymfonyBridgeBundle\Tests\DependencyInjection;
 
 use LightSaml\SymfonyBridgeBundle\DependencyInjection\LightSamlSymfonyBridgeExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-class LightSamlSymfonyBridgeExtensionTest extends \PHPUnit_Framework_TestCase
+class LightSamlSymfonyBridgeExtensionTest extends TestCase
 {
     public function test_loads_with_configuration()
     {
@@ -256,11 +257,12 @@ class LightSamlSymfonyBridgeExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedAlias, (string) $containerBuilder->getAlias('lightsaml.system.event_dispatcher'));
     }
 
-    public function test_loads_system_logger()
+    public function test_loads_system_logger_when_given_in_config()
     {
         $containerBuilder = new ContainerBuilder(new ParameterBag());
         $extension = new LightSamlSymfonyBridgeExtension();
         $config = $this->getDefaultConfig();
+        $config['light_saml_symfony_bridge']['system']['logger'] = 'some.logger';
 
         $extension->load($config, $containerBuilder);
 

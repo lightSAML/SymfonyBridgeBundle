@@ -16,20 +16,53 @@ use LightSaml\Provider\TimeProvider\TimeProviderInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class SystemContainer extends AbstractContainer implements SystemContainerInterface
+class SystemContainer implements SystemContainerInterface
 {
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var SessionInterface */
+    private $session;
+
+    /** @var TimeProviderInterface */
+    private $timeProvider;
+
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
+    /** @var LoggerInterface */
+    private $logger;
+
+    /**
+     * @param RequestStack             $requestStack
+     * @param SessionInterface         $session
+     * @param TimeProviderInterface    $timeProvider
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param LoggerInterface          $logger
+     */
+    public function __construct(
+        RequestStack $requestStack,
+        SessionInterface $session,
+        TimeProviderInterface $timeProvider,
+        EventDispatcherInterface $eventDispatcher,
+        LoggerInterface $logger
+    ) {
+        $this->requestStack = $requestStack;
+        $this->session = $session;
+        $this->timeProvider = $timeProvider;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->logger = $logger;
+    }
+
     /**
      * @return Request
      */
     public function getRequest()
     {
-        if ($this->container->has('request_stack')) {
-            return $this->container->get('request_stack')->getCurrentRequest();
-        }
-
-        return $this->container->get('request');
+        return $this->requestStack->getCurrentRequest();
     }
 
     /**
@@ -37,7 +70,7 @@ class SystemContainer extends AbstractContainer implements SystemContainerInterf
      */
     public function getSession()
     {
-        return $this->container->get('session');
+        return $this->session;
     }
 
     /**
@@ -45,7 +78,7 @@ class SystemContainer extends AbstractContainer implements SystemContainerInterf
      */
     public function getTimeProvider()
     {
-        return $this->container->get('lightsaml.system.time_provider');
+        return $this->timeProvider;
     }
 
     /**
@@ -53,7 +86,7 @@ class SystemContainer extends AbstractContainer implements SystemContainerInterf
      */
     public function getEventDispatcher()
     {
-        return $this->container->get('lightsaml.system.event_dispatcher');
+        return $this->eventDispatcher;
     }
 
     /**
@@ -61,6 +94,6 @@ class SystemContainer extends AbstractContainer implements SystemContainerInterf
      */
     public function getLogger()
     {
-        return $this->container->get('lightsaml.system.logger');
+        return $this->logger;
     }
 }

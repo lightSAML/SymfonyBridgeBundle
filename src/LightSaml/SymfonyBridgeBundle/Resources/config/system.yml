@@ -9,4 +9,4 @@ services:
         class: Symfony\Component\EventDispatcher\EventDispatcher
 
     lightsaml.system.logger:
-        alias: logger
+        class: Psr\Log\NullLogger

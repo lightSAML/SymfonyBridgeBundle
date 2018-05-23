@@ -14,13 +14,24 @@ namespace LightSaml\SymfonyBridgeBundle\Bridge\Container;
 use LightSaml\Build\Container\CredentialContainerInterface;
 use LightSaml\Store\Credential\CredentialStoreInterface;
 
-class CredentialContainer extends AbstractContainer implements CredentialContainerInterface
+class CredentialContainer implements CredentialContainerInterface
 {
+    /** @var CredentialStoreInterface */
+    private $credentialStore;
+
+    /**
+     * @param CredentialStoreInterface $credentialStore
+     */
+    public function __construct(CredentialStoreInterface $credentialStore)
+    {
+        $this->credentialStore = $credentialStore;
+    }
+
     /**
      * @return CredentialStoreInterface
      */
     public function getCredentialStore()
     {
-        return $this->container->get('lightsaml.credential.credential_store');
+        return $this->credentialStore;
     }
 }
