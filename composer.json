@@ -30,11 +30,7 @@
         "symfony/finder": "~2.7|~3.0|~4.0",
         "symfony/filesystem": "~2.7|~3.0|~4.0",
         "symfony/routing": "~2.7|~3.0|~4.0",
-        "phpunit/phpunit": "^5.7",
-        "php-coveralls/php-coveralls": "~2.0"
-    },
-    "suggest": {
-        "lightsaml/lightsamp-idp": "If you will be using IDP LightSAML services"
+        "phpunit/phpunit": "^5.7"
     },
     "config": {
         "bin-dir": "bin"

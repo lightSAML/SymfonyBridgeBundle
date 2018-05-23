@@ -15,6 +15,7 @@ before_install:
     - composer --version
     - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer.phar; fi
     - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then php php-cs-fixer.phar --version; fi
+    - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar; fi
 
 install:
     - COMPOSER_ROOT_VERSION=dev-master composer update --prefer-source $COMPOSER_FLAGS
@@ -25,4 +26,4 @@ script:
     - if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then bin/phpunit; fi
 
 after_script:
-    - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then php bin/coveralls -v; fi
+    - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then php php-coveralls.phar -v; fi
