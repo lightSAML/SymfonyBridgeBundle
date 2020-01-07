@@ -94,13 +94,12 @@ class LightSamlSymfonyBridgeExtension extends Extension
             $container->setAlias('lightsaml.own.entity_descriptor_provider', $config['own']['entity_descriptor_provider']['id']);
         } elseif (isset($config['own']['entity_descriptor_provider']['filename'])) {
             if (isset($config['own']['entity_descriptor_provider']['entity_id'])) {
-                $definition = $container->setDefinition('lightsaml.own.entity_descriptor_provider', new Definition());
-                $definition
+                $definition = $container->getDefinition('lightsaml.own.entity_descriptor_provider')
                     ->addArgument($config['own']['entity_descriptor_provider']['filename'])
                     ->addArgument($config['own']['entity_descriptor_provider']['entity_id']);
                 $this->setFactoryCompatibleWay($definition, 'LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntitiesDescriptorFile');
             } else {
-                $definition = $container->setDefinition('lightsaml.own.entity_descriptor_provider', new Definition())
+                $definition = $container->getDefinition('lightsaml.own.entity_descriptor_provider')
                     ->addArgument($config['own']['entity_descriptor_provider']['filename']);
                 $this->setFactoryCompatibleWay($definition, 'LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntityDescriptorFile');
             }
