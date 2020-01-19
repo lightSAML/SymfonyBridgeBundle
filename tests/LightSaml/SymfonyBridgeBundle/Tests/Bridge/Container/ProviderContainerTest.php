@@ -13,9 +13,9 @@ class ProviderContainerTest extends TestCase
     public function test_constructs_with_all_arguments()
     {
         new ProviderContainer(
-            $this->getMockBuilder(AttributeValueProviderInterface::class)->getMock(),
-            $this->getMockBuilder(SessionInfoProviderInterface::class)->getMock(),
-            $this->getMockBuilder(NameIdProviderInterface::class)->getMock()
+            $this->prophesize(AttributeValueProviderInterface::class)->reveal(),
+            $this->prophesize(SessionInfoProviderInterface::class)->reveal(),
+            $this->prophesize(NameIdProviderInterface::class)->reveal()
         );
     }
 }

@@ -19,15 +19,15 @@ class ServiceContainerTest extends TestCase
     public function test_constructs_with_all_arguments()
     {
         new ServiceContainer(
-            $this->getMockBuilder(AssertionValidatorInterface::class)->getMock(),
-            $this->getMockBuilder(AssertionTimeValidatorInterface::class)->getMock(),
-            $this->getMockBuilder(SignatureResolverInterface::class)->getMock(),
-            $this->getMockBuilder(EndpointResolverInterface::class)->getMock(),
-            $this->getMockBuilder(NameIdValidatorInterface::class)->getMock(),
-            $this->getMockBuilder(BindingFactoryInterface::class)->getMock(),
-            $this->getMockBuilder(SignatureValidatorInterface::class)->getMock(),
-            $this->getMockBuilder(CredentialResolverInterface::class)->getMock(),
-            $this->getMockBuilder(SessionProcessorInterface::class)->getMock()
+            $this->prophesize(AssertionValidatorInterface::class)->reveal(),
+            $this->prophesize(AssertionTimeValidatorInterface::class)->reveal(),
+            $this->prophesize(SignatureResolverInterface::class)->reveal(),
+            $this->prophesize(EndpointResolverInterface::class)->reveal(),
+            $this->prophesize(NameIdValidatorInterface::class)->reveal(),
+            $this->prophesize(BindingFactoryInterface::class)->reveal(),
+            $this->prophesize(SignatureValidatorInterface::class)->reveal(),
+            $this->prophesize(CredentialResolverInterface::class)->reveal(),
+            $this->prophesize(SessionProcessorInterface::class)->reveal()
         );
     }
 }
