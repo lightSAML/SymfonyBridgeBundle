@@ -17,13 +17,13 @@ class BuildContainerTest extends TestCase
     public function test_constructs_with_all_containers()
     {
         new BuildContainer(
-            $this->getMockBuilder(SystemContainerInterface::class)->getMock(),
-            $this->getMockBuilder(PartyContainerInterface::class)->getMock(),
-            $this->getMockBuilder(StoreContainerInterface::class)->getMock(),
-            $this->getMockBuilder(ProviderContainerInterface::class)->getMock(),
-            $this->getMockBuilder(CredentialContainerInterface::class)->getMock(),
-            $this->getMockBuilder(ServiceContainerInterface::class)->getMock(),
-            $this->getMockBuilder(OwnContainerInterface::class)->getMock()
+            $this->prophesize(SystemContainerInterface::class)->reveal(),
+            $this->prophesize(PartyContainerInterface::class)->reveal(),
+            $this->prophesize(StoreContainerInterface::class)->reveal(),
+            $this->prophesize(ProviderContainerInterface::class)->reveal(),
+            $this->prophesize(CredentialContainerInterface::class)->reveal(),
+            $this->prophesize(ServiceContainerInterface::class)->reveal(),
+            $this->prophesize(OwnContainerInterface::class)->reveal()
         );
     }
 }

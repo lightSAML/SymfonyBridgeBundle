@@ -8,6 +8,7 @@ use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\Store\Credential\CredentialStoreInterface;
 use LightSaml\SymfonyBridgeBundle\Factory\OwnEntityDescriptorProviderFactory;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Symfony\Component\Routing\RouterInterface;
 
 class OwnEntityDescriptorProviderFactoryTest extends TestCase
@@ -16,26 +17,24 @@ class OwnEntityDescriptorProviderFactoryTest extends TestCase
     {
         $factory = new OwnEntityDescriptorProviderFactory();
 
-        $routerMock = $this->getMockBuilder(RouterInterface::class)->getMock();
-        $routerMock->expects($this->exactly(2))
-            ->method('generate')
-            ->with($this->isType('string'), [], RouterInterface::ABSOLUTE_URL)
+        $routerMock = $this->prophesize(RouterInterface::class);
+        $routerMock->generate(Argument::type('string'), [], RouterInterface::ABSOLUTE_URL)
+            ->shouldBeCalledTimes(2)
             ->willReturn('http://localhost');
 
-        $credentialStoreMock = $this->getMockBuilder(CredentialStoreInterface::class)->getMock();
-        $credentialStoreMock->method('getByEntityId')
-            ->with($ownEntityId = 'own-id')
-            ->willReturn([$credentialMock = $this->getMockBuilder(X509CredentialInterface::class)->getMock()]);
+        $credentialStoreMock = $this->prophesize(CredentialStoreInterface::class);
+        $credentialStoreMock->getByEntityId($ownEntityId = 'own-id')
+            ->willReturn([$credentialMock = $this->prophesize(X509CredentialInterface::class)]);
 
-        $credentialMock->method('getCertificate')
-            ->willReturn($this->getMockBuilder(X509Certificate::class)->getMock());
+        $credentialMock->getCertificate()
+            ->willReturn($this->prophesize(X509Certificate::class));
 
         $value = $factory->build(
             $ownEntityId,
-            $routerMock,
+            $routerMock->reveal(),
             'acs',
             'sso',
-            $credentialStoreMock
+            $credentialStoreMock->reveal()
         );
 
         $this->assertInstanceOf(EntityDescriptorProviderInterface::class, $value);

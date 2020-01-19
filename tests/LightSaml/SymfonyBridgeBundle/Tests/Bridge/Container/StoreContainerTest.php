@@ -13,9 +13,9 @@ class StoreContainerTest extends TestCase
     public function test_constructs_with_all_arguments()
     {
         new StoreContainer(
-            $this->getMockBuilder(RequestStateStoreInterface::class)->getMock(),
-            $this->getMockBuilder(IdStoreInterface::class)->getMock(),
-            $this->getMockBuilder(SsoStateStoreInterface::class)->getMock()
+            $this->prophesize(RequestStateStoreInterface::class)->reveal(),
+            $this->prophesize(IdStoreInterface::class)->reveal(),
+            $this->prophesize(SsoStateStoreInterface::class)->reveal()
         );
     }
 }

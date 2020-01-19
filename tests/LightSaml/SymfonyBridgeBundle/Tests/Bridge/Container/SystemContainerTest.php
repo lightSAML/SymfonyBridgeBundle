@@ -15,11 +15,11 @@ class SystemContainerTest extends TestCase
     public function test_constructs_with_all_arguments()
     {
         new SystemContainer(
-            $this->getMockBuilder(RequestStack::class)->getMock(),
-            $this->getMockBuilder(SessionInterface::class)->getMock(),
-            $this->getMockBuilder(TimeProviderInterface::class)->getMock(),
-            $this->getMockBuilder(EventDispatcherInterface::class)->getMock(),
-            $this->getMockBuilder(LoggerInterface::class)->getMock()
+            $this->prophesize(RequestStack::class)->reveal(),
+            $this->prophesize(SessionInterface::class)->reveal(),
+            $this->prophesize(TimeProviderInterface::class)->reveal(),
+            $this->prophesize(EventDispatcherInterface::class)->reveal(),
+            $this->prophesize(LoggerInterface::class)->reveal()
         );
     }
 }
