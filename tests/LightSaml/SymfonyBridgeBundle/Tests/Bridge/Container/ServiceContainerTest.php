@@ -29,5 +29,7 @@ class ServiceContainerTest extends TestCase
             $this->getMockBuilder(CredentialResolverInterface::class)->getMock(),
             $this->getMockBuilder(SessionProcessorInterface::class)->getMock()
         );
+
+        $this->assertTrue(true);
     }
 }

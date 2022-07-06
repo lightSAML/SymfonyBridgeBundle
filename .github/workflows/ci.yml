@@ -1,0 +1,77 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ 8.1 ]
+        composer: [basic]
+        include:
+          - php: 8.0
+            composer: lowest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.9.0
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: xdebug
+          extensions: zip
+          tools: composer
+
+      - name: Determine composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=directory::$(composer config cache-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2.1.3
+        with:
+          path: ${{ steps.composer-cache.outputs.directory }}
+          key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ matrix.php }}-composer-
+
+      - name: Install dependencies
+        run: |
+          wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.8.0/php-cs-fixer.phar
+          chmod +x php-cs-fixer.phar
+          
+          if [[ "${{ matrix.composer }}" == "lowest" ]]; then
+            composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable
+          fi;
+
+          if [[ "${{ matrix.composer }}" == "basic" ]]; then
+            composer update --prefer-dist --no-interaction
+          fi;
+          composer dump-autoload -o
+
+      - name: Run php-cs-fixer
+        run: |
+          php php-cs-fixer.phar fix --dry-run -v
+
+      - name: Run tests
+        run: |
+          mkdir -p build/logs
+          php vendor/bin/phpunit -c phpunit.xml.dist --log-junit=build/logs/junit.xml --coverage-clover build/logs/clover.xml
+
+      - name: Archive logs artifacts
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs_composer-${{ matrix.composer }}_php-${{ matrix.php }}
+          path: |
+            build/logs

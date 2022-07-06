@@ -1,21 +1,30 @@
 parameters:
     lightsaml.store.request_session_prefix: main
-    lightsaml.store.request_session_sufix: saml_request_state_
+    lightsaml.store.request_session_suffix: 'saml_request_state_'
+    lightsaml.store.request_session_sufix: '%lightsaml.store.request_session_suffix%'
     lightsaml.store.sso_state_session_key: samlsso
 
 services:
+    lightsaml.store.request_factory:
+        class: LightSaml\SymfonyBridgeBundle\Factory\RequestStateSessionStoreFactory
+        arguments:
+            - "@request_stack"
+            - "%lightsaml.store.request_session_prefix%"
+            - "%lightsaml.store.request_session_suffix%"
+
     lightsaml.store.request:
         class: LightSaml\Store\Request\RequestStateSessionStore
-        arguments:
-            - "@session"
-            - "%lightsaml.store.request_session_prefix%"
-            - "%lightsaml.store.request_session_sufix%"
+        factory: ['@lightsaml.store.request_factory', 'create']
 
     lightsaml.store.id_state:
         class: LightSaml\Store\Id\NullIdStore
 
+    lightsaml.store.sso_state_factory:
+        class: LightSaml\SymfonyBridgeBundle\Factory\SsoStateSessionStoreFactory
+        arguments:
+            - "@request_stack"
+            - "%lightsaml.store.sso_state_session_key%"
+
     lightsaml.store.sso_state:
         class: LightSaml\Store\Sso\SsoStateSessionStore
-        arguments:
-            - "@session"
-            - "%lightsaml.store.sso_state_session_key%"
+        factory: ['@lightsaml.store.sso_state_factory', 'create']

@@ -17,5 +17,7 @@ class StoreContainerTest extends TestCase
             $this->getMockBuilder(IdStoreInterface::class)->getMock(),
             $this->getMockBuilder(SsoStateStoreInterface::class)->getMock()
         );
+
+        $this->assertTrue(true);
     }
 }

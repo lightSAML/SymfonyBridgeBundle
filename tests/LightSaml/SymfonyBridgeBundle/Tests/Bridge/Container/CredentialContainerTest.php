@@ -13,5 +13,7 @@ class CredentialContainerTest extends TestCase
         new CredentialContainer(
             $this->getMockBuilder(CredentialStoreInterface::class)->getMock()
         );
+
+        $this->assertTrue(true);
     }
 }

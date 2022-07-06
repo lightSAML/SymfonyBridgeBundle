@@ -17,5 +17,7 @@ class ProviderContainerTest extends TestCase
             $this->getMockBuilder(SessionInfoProviderInterface::class)->getMock(),
             $this->getMockBuilder(NameIdProviderInterface::class)->getMock()
         );
+
+        $this->assertTrue(true);
     }
 }

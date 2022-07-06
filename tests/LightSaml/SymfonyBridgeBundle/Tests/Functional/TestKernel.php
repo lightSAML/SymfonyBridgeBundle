@@ -14,7 +14,7 @@ class TestKernel extends Kernel
      *
      * @return iterable|BundleInterface[] An iterable of bundle instances
      */
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         $bundles = [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -24,13 +24,20 @@ class TestKernel extends Kernel
         return $bundles;
     }
 
+    public function getProjectDir(): string
+    {
+        return __DIR__;
+    }
+
     /**
      * Loads the container configuration.
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config.yml');
+        if (self::MAJOR_VERSION === 5) {
+            $loader->load(__DIR__ . '/config_sf5.yml');
+        } else {
+            $loader->load(__DIR__ . '/config_sf6.yml');
+        }
     }
-
-
 }

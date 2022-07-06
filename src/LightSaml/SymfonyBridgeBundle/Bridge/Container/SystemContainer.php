@@ -24,9 +24,6 @@ class SystemContainer implements SystemContainerInterface
     /** @var RequestStack */
     private $requestStack;
 
-    /** @var SessionInterface */
-    private $session;
-
     /** @var TimeProviderInterface */
     private $timeProvider;
 
@@ -38,20 +35,17 @@ class SystemContainer implements SystemContainerInterface
 
     /**
      * @param RequestStack             $requestStack
-     * @param SessionInterface         $session
      * @param TimeProviderInterface    $timeProvider
      * @param EventDispatcherInterface $eventDispatcher
      * @param LoggerInterface          $logger
      */
     public function __construct(
         RequestStack $requestStack,
-        SessionInterface $session,
         TimeProviderInterface $timeProvider,
         EventDispatcherInterface $eventDispatcher,
         LoggerInterface $logger
     ) {
         $this->requestStack = $requestStack;
-        $this->session = $session;
         $this->timeProvider = $timeProvider;
         $this->eventDispatcher = $eventDispatcher;
         $this->logger = $logger;
@@ -70,7 +64,7 @@ class SystemContainer implements SystemContainerInterface
      */
     public function getSession()
     {
-        return $this->session;
+        return $this->getRequest()->getSession();
     }
 
     /**

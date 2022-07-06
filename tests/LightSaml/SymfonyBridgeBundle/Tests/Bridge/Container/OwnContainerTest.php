@@ -16,5 +16,7 @@ class OwnContainerTest extends TestCase
             $this->getMockBuilder(CredentialStoreInterface::class)->getMock(),
             "string"
         );
+
+        $this->assertTrue(true);
     }
 }

@@ -32,10 +32,12 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FunctionalTest extends WebTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $_SERVER['KERNEL_CLASS'] = TestKernel::class;
@@ -44,7 +46,7 @@ class FunctionalTest extends WebTestCase
         $fs->remove(__DIR__.'/cache');
     }
 
-    protected static function getKernelClass()
+    protected static function getKernelClass(): string
     {
         return TestKernel::class;
     }
@@ -52,6 +54,13 @@ class FunctionalTest extends WebTestCase
     public function test_build_container()
     {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $this->assertInstanceOf(BuildContainerInterface::class, $buildContainer);
@@ -63,6 +72,13 @@ class FunctionalTest extends WebTestCase
 
     public function test_system_container() {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $systemContainer = $buildContainer->getSystemContainer();
@@ -74,6 +90,13 @@ class FunctionalTest extends WebTestCase
     public function test_party_container()
     {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $partyContainer = $buildContainer->getPartyContainer();
@@ -85,6 +108,13 @@ class FunctionalTest extends WebTestCase
     public function test_store_container()
     {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $storeContainer = $buildContainer->getStoreContainer();
@@ -96,6 +126,13 @@ class FunctionalTest extends WebTestCase
     public function test_provider_container()
     {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $providerContainer = $buildContainer->getProviderContainer();
@@ -107,6 +144,13 @@ class FunctionalTest extends WebTestCase
     public function test_credential_container()
     {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $credentialContainer = $buildContainer->getCredentialContainer();
@@ -116,6 +160,13 @@ class FunctionalTest extends WebTestCase
     public function test_service_container()
     {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $serviceContainer = $buildContainer->getServiceContainer();
@@ -134,11 +185,18 @@ class FunctionalTest extends WebTestCase
     public function test_own_container()
     {
         static::createClient();
+
+        $requestStack = static::$kernel->getContainer()->get('request_stack');
+        $session = $this->createMock(SessionInterface::class);
+        $request = Request::create('/');
+        $request->setSession($session);
+        $requestStack->push($request);
+
         /** @var BuildContainerInterface $buildContainer */
         $buildContainer = static::$kernel->getContainer()->get('lightsaml.container.build');
         $ownContainer = $buildContainer->getOwnContainer();
         $this->assertInstanceOf(EntityDescriptorProviderInterface::class, $ownContainer->getOwnEntityDescriptorProvider());
-        $this->assertInternalType('array', $ownContainer->getOwnCredentials());
+        $this->assertIsArray($ownContainer->getOwnCredentials());
         array_map(function ($credential) {
             $this->assertInstanceOf(CredentialInterface::class, $credential);
         }, $ownContainer->getOwnCredentials());
