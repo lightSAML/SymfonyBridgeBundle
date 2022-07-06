@@ -39,4 +39,6 @@
 /*.phar
 /*.cache
 
-tests/LightSaml/SymfonyBridgeBundle/Tests/Functional/cache/*
+/tests/LightSaml/SymfonyBridgeBundle/Tests/Functional/var/
+/var
+.idea
