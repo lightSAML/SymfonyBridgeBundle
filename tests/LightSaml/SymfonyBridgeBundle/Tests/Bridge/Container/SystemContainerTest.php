@@ -16,10 +16,11 @@ class SystemContainerTest extends TestCase
     {
         new SystemContainer(
             $this->getMockBuilder(RequestStack::class)->getMock(),
-            $this->getMockBuilder(SessionInterface::class)->getMock(),
             $this->getMockBuilder(TimeProviderInterface::class)->getMock(),
             $this->getMockBuilder(EventDispatcherInterface::class)->getMock(),
             $this->getMockBuilder(LoggerInterface::class)->getMock()
         );
+
+        $this->assertTrue(true);
     }
 }

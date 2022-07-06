@@ -16,5 +16,7 @@ class PartyContainerTest extends TestCase
             $this->getMockBuilder(EntityDescriptorStoreInterface::class)->getMock(),
             $this->getMockBuilder(TrustOptionsStoreInterface::class)->getMock()
         );
+
+        $this->assertTrue(true);
     }
 }

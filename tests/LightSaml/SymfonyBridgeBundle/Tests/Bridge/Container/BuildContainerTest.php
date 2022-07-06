@@ -25,5 +25,7 @@ class BuildContainerTest extends TestCase
             $this->getMockBuilder(ServiceContainerInterface::class)->getMock(),
             $this->getMockBuilder(OwnContainerInterface::class)->getMock()
         );
+
+        $this->assertTrue(true);
     }
 }

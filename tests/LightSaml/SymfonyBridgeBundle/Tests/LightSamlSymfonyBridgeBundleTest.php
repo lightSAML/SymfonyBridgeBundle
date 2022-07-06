@@ -43,6 +43,7 @@ class LightSamlSymfonyBridgeBundleTest extends TestCase
                     $pass->getTagName() == $tagName &&
                     $pass->getMethodName() == $methodName
                 ) {
+                    $this->assertTrue(true);
                     return;
                 }
             }

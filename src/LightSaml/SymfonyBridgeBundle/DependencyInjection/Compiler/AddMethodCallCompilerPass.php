@@ -17,47 +17,21 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class AddMethodCallCompilerPass implements CompilerPassInterface
 {
-    /** @var string */
-    private $serviceId;
-
-    /** @var string */
-    private $tagName;
-
-    /** @var string */
-    private $methodName;
-
-    /**
-     * @param $serviceId
-     * @param $tagName
-     * @param $methodName
-     */
-    public function __construct($serviceId, $tagName, $methodName)
+    public function __construct(private string $serviceId, private string $tagName, private string $methodName)
     {
-        $this->serviceId = $serviceId;
-        $this->tagName = $tagName;
-        $this->methodName = $methodName;
     }
 
-    /**
-     * @return string
-     */
-    public function getServiceId()
+    public function getServiceId(): string
     {
         return $this->serviceId;
     }
 
-    /**
-     * @return string
-     */
-    public function getTagName()
+    public function getTagName(): string
     {
         return $this->tagName;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return $this->methodName;
     }

@@ -4,7 +4,9 @@ namespace LightSaml\SymfonyBridgeBundle\Tests\DependencyInjection;
 
 use LightSaml\SymfonyBridgeBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\HttpKernel\Kernel;
 
 class ConfigurationTest extends TestCase
 {
@@ -18,14 +20,18 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     * @expectedExceptionMessage The child node "own" at path "light_saml_symfony_bridge" must be configured
-     */
     public function test_does_not_allow_empty_config()
     {
+        $this->expectException(InvalidConfigurationException::class);
+        if (Kernel::MAJOR_VERSION === 5) {
+            $this->expectExceptionMessage('The child node "own" at path "light_saml_symfony_bridge" must be configured.');
+        } else {
+            $this->expectExceptionMessage('The child config "own" under "light_saml_symfony_bridge" must be configured.');
+        }
         $config = [
             'light_saml_symfony_bridge' => [
 
@@ -47,6 +53,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_own_entity_descriptor_provider_from_file_with_entity_id()
@@ -63,6 +71,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_own_entity_descriptor_provider_from_service()
@@ -78,6 +88,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_own_credentials_from_files()
@@ -101,6 +113,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_system_event_dispatcher()
@@ -116,6 +130,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_system_logger()
@@ -131,6 +147,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_store_request()
@@ -146,6 +164,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_store_id_state()
@@ -161,6 +181,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_store_sso_state()
@@ -176,6 +198,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     public function test_allows_party_idp_from_files()
@@ -196,6 +220,8 @@ class ConfigurationTest extends TestCase
             ],
         ];
         $this->processConfiguration($config);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -206,8 +232,6 @@ class ConfigurationTest extends TestCase
     protected function processConfiguration(array $configs)
     {
         $configuration = new Configuration();
-        $processor = new Processor();
-
-        return $processor->processConfiguration($configuration, $configs);
+        return (new Processor())->processConfiguration($configuration, $configs);
     }
 }

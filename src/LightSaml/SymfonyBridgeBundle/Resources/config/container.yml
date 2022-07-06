@@ -15,7 +15,6 @@ services:
         class: LightSaml\SymfonyBridgeBundle\Bridge\Container\SystemContainer
         arguments:
             - "@request_stack"
-            - "@session"
             - "@lightsaml.system.time_provider"
             - "@lightsaml.system.event_dispatcher"
             - "@lightsaml.system.logger"

@@ -6,6 +6,7 @@ use LightSaml\SymfonyBridgeBundle\DependencyInjection\LightSamlSymfonyBridgeExte
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory;
 
 class LightSamlSymfonyBridgeExtensionTest extends TestCase
 {
@@ -16,6 +17,8 @@ class LightSamlSymfonyBridgeExtensionTest extends TestCase
         $config = $this->getDefaultConfig();
 
         $extension->load($config, $containerBuilder);
+
+        $this->assertTrue(true);
     }
 
     public function test_loads_build_container()
@@ -49,15 +52,10 @@ class LightSamlSymfonyBridgeExtensionTest extends TestCase
 
         $this->assertTrue($containerBuilder->hasDefinition('lightsaml.own.entity_descriptor_provider'));
         $definition = $containerBuilder->getDefinition('lightsaml.own.entity_descriptor_provider');
-        if (method_exists($definition, 'getFactory')) {
-            $this->assertEquals(
-                ['LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntityDescriptorFile'],
-                $definition->getFactory()
-            );
-        } else {
-            $this->assertEquals('LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', $definition->getFactoryClass());
-            $this->assertEquals('fromEntityDescriptorFile', $definition->getFactoryMethod());
-        }
+        $this->assertEquals(
+            [FileEntityDescriptorProviderFactory::class, 'fromEntityDescriptorFile'],
+            $definition->getFactory()
+        );
         $this->assertCount(1, $definition->getArguments());
         $this->assertEquals($config['light_saml_symfony_bridge']['own']['entity_descriptor_provider']['filename'], $definition->getArgument(0));
     }
@@ -73,15 +71,10 @@ class LightSamlSymfonyBridgeExtensionTest extends TestCase
 
         $this->assertTrue($containerBuilder->hasDefinition('lightsaml.own.entity_descriptor_provider'));
         $definition = $containerBuilder->getDefinition('lightsaml.own.entity_descriptor_provider');
-        if (method_exists($definition, 'getFactory')) {
-            $this->assertEquals(
-                ['LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', 'fromEntitiesDescriptorFile'],
-                $definition->getFactory()
-            );
-        } else {
-            $this->assertEquals('LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProviderFactory', $definition->getFactoryClass());
-            $this->assertEquals('fromEntitiesDescriptorFile', $definition->getFactoryMethod());
-        }
+        $this->assertEquals(
+            [FileEntityDescriptorProviderFactory::class, 'fromEntitiesDescriptorFile'],
+            $definition->getFactory()
+        );
         $this->assertCount(2, $definition->getArguments());
         $this->assertEquals($config['light_saml_symfony_bridge']['own']['entity_descriptor_provider']['filename'], $definition->getArgument(0));
         $this->assertEquals($config['light_saml_symfony_bridge']['own']['entity_descriptor_provider']['entity_id'], $definition->getArgument(1));
